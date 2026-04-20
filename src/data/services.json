@@ -1,0 +1,26 @@
+[
+  {
+    "id": "assistance",
+    "title": "Overseas Job Assistance",
+    "description": "Comprehensive guidance for navigating international job markets and securing positions in top firms.",
+    "icon": "Globe"
+  },
+  {
+    "id": "recruitment",
+    "title": "Manpower Recruitment",
+    "description": "Connecting skilled Indian professionals with global employers across various sectors.",
+    "icon": "Users"
+  },
+  {
+    "id": "docs",
+    "title": "Documentation Support",
+    "description": "Expert assistance with visa processing, document attestation, and regulatory compliance.",
+    "icon": "FileText"
+  },
+  {
+    "id": "consultancy",
+    "title": "Career Consultancy",
+    "description": "Personalized career mapping and industry-specific training recommendations.",
+    "icon": "Briefcase"
+  }
+]

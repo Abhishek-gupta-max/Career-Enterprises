@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-navy: #1a365d;
+  --primary-light: #2c5282;
+  --secondary-gold: #df9a28;
+  --secondary-orange: #ed8936;
+  --text-dark: #1a202c;
+  --text-muted: #4a5568;
+  --bg-light: #f7fafc;
+  --bg-white: #ffffff;
+  --transition: all 0.3s ease;
+  
+  font-family: 'Roboto', system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+/* Custom Base Utilities */
+
+.section {
+  @apply py-20 px-4 max-w-[1200px] mx-auto;
+}
+
+.container {
+  @apply w-full max-w-[1200px] mx-auto px-6;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-primary-navy to-primary-light bg-clip-text text-transparent;
+}
+
+.btn-primary {
+  @apply bg-primary-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply bg-secondary-gold text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-secondary-orange hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300;
+}
