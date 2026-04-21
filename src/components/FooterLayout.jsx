@@ -35,9 +35,9 @@ export const Footer = () => {
                 { icon: Instagram, href: "https://www.instagram.com/reel/DOWDphwEvtH/?igsh=emkzcXRremZ0Zzcx" },
                 { icon: Linkedin, href: "#" }
               ].map((Social, i) => (
-                <a 
-                  key={i} 
-                  href={Social.href} 
+                <a
+                  key={i}
+                  href={Social.href}
                   target={Social.href !== "#" ? "_blank" : undefined}
                   rel={Social.href !== "#" ? "noopener noreferrer" : undefined}
                   className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-royal-gold hover:text-midnight transition-all duration-500 border border-white/5"
@@ -71,15 +71,17 @@ export const Footer = () => {
           <div>
             <h3 className="text-xs font-black uppercase tracking-[0.3em] text-royal-gold mb-10">Legal Authority</h3>
             <div className="bg-white/5 p-8 rounded-[35px] border border-white/10 text-[10px] space-y-6 group hover:bg-white/10 transition-all duration-500">
-               <div>
-                  <p className="font-black text-slate-400 mb-2 uppercase tracking-widest">RA LICENSE</p>
-                  <p className="text-white font-black text-xs tracking-widest">B-3077/HP/PART/100/11087/2025</p>
-               </div>
-               <div>
+              <div>
+                <p className="font-black text-slate-400 mb-2 uppercase tracking-widest">RA LICENSE</p>
+                <p className="text-white font-black text-xs tracking-widest">B-3077/HP/PART/100/11087/2025</p>
+                <p className="font-black text-slate-400 mb-2 uppercase tracking-widest">REGISTRATION ID</p>
+                <p className="text-white font-black text-xs tracking-widest uppercase">RA6341360</p>
+              </div>
+              {/* <div>
                   <p className="font-black text-slate-400 mb-2 uppercase tracking-widest">REGISTRATION ID</p>
                   <p className="text-white font-black text-xs tracking-widest uppercase">RA6341360</p>
-               </div>
-               <p className="pt-4 border-t border-white/5 text-[9px] text-royal-gold font-bold italic">Ministry of External Affairs Approved</p>
+               </div> */}
+              <p className="pt-4 border-t border-white/5 text-[9px] text-royal-gold font-bold italic">Ministry of External Affairs Approved</p>
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@ export const Footer = () => {
           <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 font-inter">
             &copy; {currentYear} Career Enterprises. Managed by Executive Board.
           </p>
-          <button 
+          <button
             onClick={scrollToTop}
             className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-royal-gold hover:text-white transition-colors"
           >
@@ -102,9 +104,9 @@ export const Footer = () => {
 
 export const WhatsAppButton = () => {
   return (
-    <a 
-      href="https://wa.me/917657950996" 
-      target="_blank" 
+    <a
+      href="https://wa.me/917657950996"
+      target="_blank"
       rel="noreferrer"
       className="fixed bottom-10 right-10 z-40 bg-midnight text-royal-gold p-5 rounded-[25px] shadow-2xl hover:scale-110 transition-all duration-500 group flex items-center gap-3 border border-royal-gold/30 hover:bg-royal-gold hover:text-midnight"
     >
@@ -112,7 +114,7 @@ export const WhatsAppButton = () => {
         DISPATCH QUERY
       </span>
       <div className="w-6 h-6 flex items-center justify-center">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-2.32 0-4.591 1.342-4.591 3.27 0 .462.115.924.347 1.33l-.155.54a1.32 1.32 0 0 0-.012.33 1.31 1.31 0 0 0 .152.296l.332.613c.231.432.551.812.946 1.111.455.343.91.543 1.332.603.421.06 1.05.06 1.442.222.392.162.62.585.832.964l.325.592c.15.27.34.498.56.674a1.71 1.71 0 0 0 .97.352 1.54 1.54 0 0 0 .892-.257 1.75 1.75 0 0 0 .73-.72l.44-1.077c.184-.448.24-.91.168-1.373a2.3 2.3 0 0 0-.348-1.002l-.65-1.127a3.4 3.4 0 0 0-.91-1.025 4.1 4.1 0 0 0-.853-.453l-.534-.2c-.3-.112-.62-.234-.94-.372l-.46-.2a3.8 3.8 0 0 0-.54-.2 3.7 3.7 0 0 0-.6-.088 3.4 3.4 0 0 0-.6.042l-.54.088c-.18.044-.35.1-.51.17l-.46.216z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-2.32 0-4.591 1.342-4.591 3.27 0 .462.115.924.347 1.33l-.155.54a1.32 1.32 0 0 0-.012.33 1.31 1.31 0 0 0 .152.296l.332.613c.231.432.551.812.946 1.111.455.343.91.543 1.332.603.421.06 1.05.06 1.442.222.392.162.62.585.832.964l.325.592c.15.27.34.498.56.674a1.71 1.71 0 0 0 .97.352 1.54 1.54 0 0 0 .892-.257 1.75 1.75 0 0 0 .73-.72l.44-1.077c.184-.448.24-.91.168-1.373a2.3 2.3 0 0 0-.348-1.002l-.65-1.127a3.4 3.4 0 0 0-.91-1.025 4.1 4.1 0 0 0-.853-.453l-.534-.2c-.3-.112-.62-.234-.94-.372l-.46-.2a3.8 3.8 0 0 0-.54-.2 3.7 3.7 0 0 0-.6-.088 3.4 3.4 0 0 0-.6.042l-.54.088c-.18.044-.35.1-.51.17l-.46.216z" /></svg>
       </div>
     </a>
   );

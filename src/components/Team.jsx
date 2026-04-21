@@ -10,6 +10,7 @@ const Team = () => {
       phone: "+91-7807464389",
       email: "careerenterprises0786@gmail.com",
       image: "/src/assets/card_vikas_legal.jpg", 
+      imgClass: "object-cover object-top",
       bio: "Leading the global expansion and strategic partnerships of Career Enterprises."
     },
     {
@@ -55,11 +56,11 @@ const Team = () => {
               transition={{ delay: idx * 0.1, duration: 0.8 }}
               className="group"
             >
-              <div className="relative mb-8 rounded-[40px] overflow-hidden bg-slate-100 aspect-[1.6/1] shadow-2xl shadow-slate-200 group-hover:shadow-royal-gold/20 transition-all duration-700">
+              <div className="relative mb-8 rounded-[40px] overflow-hidden bg-slate-100 aspect-[1.6/1] flex items-center justify-center shadow-2xl shadow-slate-200 group-hover:shadow-royal-gold/20 transition-all duration-700">
                 <img 
                   src={member.image} 
                   alt={member.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 grayscale group-hover:grayscale-0"
+                  className={`w-full h-full transition-transform duration-1000 grayscale group-hover:grayscale-0 group-hover:scale-105 ${member.imgClass || 'object-contain p-2 object-center'}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center text-white">
