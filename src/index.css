@@ -3,20 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --primary-navy: #1a365d;
-  --primary-light: #2c5282;
-  --secondary-gold: #df9a28;
-  --secondary-orange: #ed8936;
-  --text-dark: #1a202c;
-  --text-muted: #4a5568;
-  --bg-light: #f7fafc;
-  --bg-white: #ffffff;
+  --midnight: #0F172A;
+  --royal-gold: #D4AF37;
+  --off-white: #F8FAFC;
   --transition: all 0.3s ease;
   
-  font-family: 'Roboto', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
-  color: var(--text-dark);
-  background-color: var(--bg-light);
+  color: var(--midnight);
+  background-color: var(--off-white);
 }
 
 * {
@@ -35,7 +30,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -54,24 +49,43 @@ button {
   transition: var(--transition);
 }
 
-/* Custom Base Utilities */
-
-.section {
-  @apply py-20 px-4 max-w-[1200px] mx-auto;
+@layer base {
+  body {
+    @apply bg-off-white text-midnight font-inter;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-outfit;
+  }
 }
 
-.container {
-  @apply w-full max-w-[1200px] mx-auto px-6;
+@layer components {
+  .section {
+    @apply py-24 px-6 max-w-7xl mx-auto;
+  }
+  .container {
+    @apply w-full max-w-[1200px] mx-auto px-6;
+  }
+  .btn-primary {
+    @apply bg-midnight text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg;
+  }
+  .btn-gold {
+    @apply bg-royal-gold text-midnight px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-midnight hover:text-white transition-all duration-500 shadow-2xl shadow-royal-gold/20;
+  }
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl rounded-[40px];
+  }
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-royal-gold via-yellow-200 to-royal-gold;
+  }
 }
 
-.gradient-text {
-  @apply bg-gradient-to-r from-primary-navy to-primary-light bg-clip-text text-transparent;
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-.btn-primary {
-  @apply bg-primary-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300;
+::-webkit-scrollbar-track {
+  @apply bg-off-white;
 }
-
-.btn-secondary {
-  @apply bg-secondary-gold text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-secondary-orange hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300;
+::-webkit-scrollbar-thumb {
+  @apply bg-midnight/20 rounded-full hover:bg-midnight/30 transition-all;
 }

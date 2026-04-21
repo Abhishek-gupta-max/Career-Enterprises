@@ -7,17 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary-navy': '#1a365d',
-        'primary-light': '#2c5282',
-        'secondary-gold': '#df9a28',
-        'secondary-orange': '#ed8936',
-        'text-dark': '#1a202c',
-        'text-muted': '#4a5568',
-        'bg-light': '#f7fafc',
+        'midnight': '#0F172A',
+        'royal-gold': '#D4AF37',
+        'off-white': '#F8FAFC',
+        'slate-900': '#0F172A',
+        'slate-800': '#1E293B',
       },
       fontFamily: {
-        'montserrat': ['Montserrat', 'sans-serif'],
-        'roboto': ['Roboto', 'sans-serif'],
+        'outfit': ['Outfit', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',
