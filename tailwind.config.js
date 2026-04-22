@@ -4,14 +4,16 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         'midnight': '#0F172A',
         'royal-gold': '#D4AF37',
         'off-white': '#F8FAFC',
-        'slate-900': '#0F172A',
-        'slate-800': '#1E293B',
+        'dark-surface': '#111827',
+        'dark-card': '#1F2937',
+        'dark-border': '#374151',
       },
       fontFamily: {
         'outfit': ['Outfit', 'sans-serif'],
@@ -19,7 +21,17 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
-      }
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-out',
+        'slide-up': 'slideUp 0.4s ease-out',
+        'skeleton': 'skeleton 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+        slideUp: { '0%': { opacity: 0, transform: 'translateY(16px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+        skeleton: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.4 } },
+      },
     },
   },
   plugins: [],
