@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import { Footer, WhatsAppButton } from './components/layout/Footer';
+import { AdminRoute } from './components/auth/AdminRoute';
 
 // Lazy-loaded pages (code splitting)
 const Home      = lazy(() => import('./pages/Home'));
@@ -10,6 +11,8 @@ const JobsPage  = lazy(() => import('./pages/JobsPage'));
 const JobDetail = lazy(() => import('./pages/JobDetail'));
 const Apply     = lazy(() => import('./pages/Apply'));
 const SavedJobs = lazy(() => import('./pages/SavedJobs'));
+const EmployerPage = lazy(() => import('./pages/EmployerPage'));
+const CareersPage = lazy(() => import('./pages/CareersPage'));
 const NotFound  = lazy(() => import('./pages/NotFound'));
 
 // Scroll to top on every route change
@@ -43,6 +46,8 @@ function AppRoutes() {
           <Route path="/jobs/:id"       element={<JobDetail />} />
           <Route path="/jobs/:id/apply" element={<Apply />} />
           <Route path="/saved"          element={<SavedJobs />} />
+          <Route path="/employer"       element={<AdminRoute><EmployerPage /></AdminRoute>} />
+          <Route path="/careers"        element={<CareersPage />} />
           <Route path="*"              element={<NotFound />} />
         </Routes>
       </Suspense>

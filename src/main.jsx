@@ -5,6 +5,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import { AppProvider } from './context/AppContext';
 import App from './App.jsx';
+import 'primereact/resources/themes/lara-light-amber/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 import './index.css';
 
 const queryClient = new QueryClient({

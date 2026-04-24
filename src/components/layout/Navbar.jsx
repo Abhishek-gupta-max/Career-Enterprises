@@ -10,6 +10,8 @@ const navLinks = [
   { name: 'About', to: '/#about' },
   { name: 'Services', to: '/#services' },
   { name: 'Jobs', to: '/jobs' },
+  { name: 'Employer', to: '/employer' },
+  { name: 'Careers', to: '/careers' },
   { name: 'Contact', to: '/#contact' },
 ];
 
@@ -32,17 +34,18 @@ export default function Navbar() {
   const transparent = isHome && !scrolled;
 
   return (
-    <nav
-      className={cn(
-        'fixed w-full z-50 transition-all duration-500',
-        transparent
-          ? 'bg-transparent py-5'
-          : 'bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl shadow-sm border-b border-slate-100 dark:border-dark-border py-3'
-      )}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="container mx-auto flex justify-between items-center">
+    <header className={cn('fixed w-full z-50 transition-all duration-500', transparent ? 'bg-transparent' : 'bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl shadow-sm border-b border-slate-100 dark:border-dark-border')}>
+      {/* Top Bar for License Info */}
+      <div className="bg-midnight dark:bg-black text-white py-2 px-4 border-b border-royal-gold/20">
+        <div className="container mx-auto flex flex-col items-center justify-center text-[10px] sm:text-xs font-bold tracking-wider gap-0.5">
+          <span className="text-royal-gold uppercase tracking-[0.2em]">Career Enterprises</span>
+          <span className="text-slate-300">LIC Number: B-3077/HP/PART/100/11087/2025</span>
+          <span className="text-slate-300">RA ID Number: RA6341360</span>
+        </div>
+      </div>
+      
+      <nav role="navigation" aria-label="Main navigation" className={cn('py-3 transition-all duration-500', transparent && 'py-5')}>
+        <div className="container mx-auto flex justify-between items-center px-4 md:px-0">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group" aria-label="Career Enterprises Home">
           <div className="w-10 h-10 bg-royal-gold rounded-xl flex items-center justify-center shadow-md group-hover:rotate-12 transition-transform duration-500 flex-shrink-0">
@@ -205,6 +208,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+      </nav>
+    </header>
   );
 }

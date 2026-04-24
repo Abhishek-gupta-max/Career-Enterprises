@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchJobs, fetchJobById, fetchFeaturedJobs } from '../services/jobsService.js';
+import { fetchJobs, fetchJobById, fetchFeaturedJobs, fetchApplications } from '../services/jobsService.js';
 
 /**
  * Hook for paginated job listing with search/filter/sort.
@@ -33,5 +33,16 @@ export function useFeaturedJobs() {
     queryKey: ['featured-jobs'],
     queryFn: fetchFeaturedJobs,
     staleTime: 1000 * 60 * 10,
+  });
+}
+
+/**
+ * Hook for fetching all applications.
+ */
+export function useApplications() {
+  return useQuery({
+    queryKey: ['applications'],
+    queryFn: fetchApplications,
+    staleTime: 1000 * 60 * 1, // 1 minute cache
   });
 }
