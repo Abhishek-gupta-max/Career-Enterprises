@@ -1,41 +1,45 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Award, FileCheck } from 'lucide-react';
+import vikasCard from '../assets/card_vikas_legal.jpg';
+import raviCard from '../assets/card_ravi.jpg';
+import vishalCard from '../assets/card_vishal.jpg';
+import ravinderCard from '../assets/card_ravinder.jpg';
 
 const CredentialGallery = () => {
   const cards = [
     {
       title: "Executive ID",
       name: "Mr. Vikas",
-      img: "/src/assets/card_vikas_legal.jpg",
+      img: vikasCard,
       imgClass: "object-cover object-top",
       desc: "Top profile identifying the strategic direction and partnership lead."
     },
     {
       title: "Talent ID",
       name: "Mr. Ravi Rana",
-      img: "/src/assets/card_ravi.jpg",
+      img: raviCard,
       imgClass: "object-contain p-2 object-center",
       desc: "Verification for our lead Hiring Manager and talent specialist."
     },
     {
       title: "Advisory ID",
       name: "Vishal Rana",
-      img: "/src/assets/card_vishal.jpg",
+      img: vishalCard,
       imgClass: "object-contain p-2 object-center",
       desc: "Certification for our senior documentation and career consultant."
     },
     {
       title: "Operational ID",
       name: "Miss Ravinder Kaur",
-      img: "/src/assets/card_ravinder.jpg",
+      img: ravinderCard,
       imgClass: "object-contain p-2 object-center",
       desc: "Official recognition for our operations management lead."
     },
     {
       title: "Legal Accreditation",
       name: "MEA License",
-      img: "/src/assets/card_vikas_legal.jpg",
+      img: vikasCard,
       imgClass: "object-cover object-bottom",
       desc: "Government of India registered license (B-3077/HP/PART/100/11087/2025)."
     }

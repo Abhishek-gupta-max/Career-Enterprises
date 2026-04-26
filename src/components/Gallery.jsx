@@ -1,13 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ownerImg from '../assets/owner.jpg';
+import vikasCard from '../assets/card_vikas_legal.jpg';
+import raviCard from '../assets/card_ravi.jpg';
+import vishalCard from '../assets/card_vishal.jpg';
+import ravinderCard from '../assets/card_ravinder.jpg';
 
 const Gallery = () => {
   const images = [
-    { src: "/src/assets/owner.jpg", alt: "Office and Managing Director" },
-    { src: "/src/assets/card_vikas_legal.jpg", alt: "MEA License and ID" },
-    { src: "/src/assets/card_ravi.jpg", alt: "Hiring Manager" },
-    { src: "/src/assets/card_vishal.jpg", alt: "Advisor" },
-    { src: "/src/assets/card_ravinder.jpg", alt: "Operations Manager" }
+    { src: ownerImg, alt: "Office and Managing Director" },
+    { src: vikasCard, alt: "MEA License and ID" },
+    { src: raviCard, alt: "Hiring Manager" },
+    { src: vishalCard, alt: "Advisor" },
+    { src: ravinderCard, alt: "Operations Manager" }
   ];
 
   return (

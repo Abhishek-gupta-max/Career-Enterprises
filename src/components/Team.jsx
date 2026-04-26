@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, Linkedin, ExternalLink } from 'lucide-react';
+import ownerImg from '../assets/owner.jpg';
+import raviCard from '../assets/card_ravi.jpg';
+import vishalCard from '../assets/card_vishal.jpg';
+import ravinderCard from '../assets/card_ravinder.jpg';
 
 const Team = () => {
   const team = [
@@ -9,7 +13,7 @@ const Team = () => {
       role: "Strategic Visionary",
       phone: "+91-7807464389",
       email: "careerenterprises0786@gmail.com",
-      image: "/src/assets/owner.jpg", 
+      image: ownerImg, 
       imgClass: "object-cover object-center",
       bio: "Leading the global expansion and strategic partnerships of Career Enterprises."
     },
@@ -18,7 +22,7 @@ const Team = () => {
       role: "Hiring Manager",
       phone: "+91-9805364389",
       email: "careerenterprises0888@gmail.com",
-      image: "/src/assets/card_ravi.jpg",
+      image: raviCard,
       bio: "Executive lead for high-impact candidate placements and industry relations."
     },
     {
@@ -26,7 +30,7 @@ const Team = () => {
       role: "Senior advisor",
       phone: "+91-8988637863",
       email: "careerenterprises0888@gmail.com",
-      image: "/src/assets/card_vishal.jpg",
+      image: vishalCard,
       bio: "Consultancy expert specializing in documentation and international mobility."
     },
     {
@@ -34,7 +38,7 @@ const Team = () => {
       role: "Operations Manager",
       phone: "+91-9805523265",
       email: "careerenterprises0888@gmail.com",
-      image: "/src/assets/card_ravinder.jpg",
+      image: ravinderCard,
       bio: "Overseeing seamless operation and compliance for all global recruitment cycles."
     }
   ];

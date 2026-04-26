@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Target, Award, User } from 'lucide-react';
+import ownerImg from '../assets/owner.jpg';
 
 const About = () => {
   return (
@@ -15,7 +16,7 @@ const About = () => {
           <div className="relative z-10 glass-card p-4 overflow-hidden shadow-2xl">
               <div className="aspect-square md:aspect-[4/3] bg-slate-200 flex items-center justify-center relative overflow-hidden rounded-[30px]">
                  <img 
-                  src="/src/assets/owner.jpg" 
+                  src={ownerImg} 
                   alt="Mr. Vikas - Managing Director" 
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
                  />
