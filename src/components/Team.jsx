@@ -9,8 +9,8 @@ const Team = () => {
       role: "Strategic Visionary",
       phone: "+91-7807464389",
       email: "careerenterprises0786@gmail.com",
-      image: "/src/assets/card_vikas_legal.jpg", 
-      imgClass: "object-cover object-top",
+      image: "/src/assets/owner.jpg", 
+      imgClass: "object-cover object-center",
       bio: "Leading the global expansion and strategic partnerships of Career Enterprises."
     },
     {

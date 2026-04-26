@@ -25,41 +25,43 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section bg-white overflow-hidden">
-      <div className="container">
-        <div className="text-center mb-16">
-          <span className="text-secondary-gold font-bold uppercase tracking-widest text-sm">Success Stories</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-primary-navy">What Our Candidates Say</h2>
-          <div className="w-20 h-1 bg-secondary-gold mx-auto mt-4"></div>
+    <section className="section bg-white dark:bg-dark-surface py-24 md:py-32 overflow-hidden border-t border-slate-100 dark:border-dark-border">
+      <div className="container px-6 mx-auto">
+        <div className="text-center mb-20">
+          <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8">Success Stories</span>
+          <h2 className="text-4xl md:text-5xl font-black text-midnight dark:text-white font-outfit">What Our <span className="text-royal-gold">Candidates</span> Say</h2>
+          <p className="text-slate-500 mt-6 max-w-xl mx-auto font-inter text-sm leading-relaxed">
+            Real stories from real people who successfully moved overseas with Career Enterprises.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((t, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-bg-light p-8 rounded-3xl relative border border-gray-100 hover:shadow-lg transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1, duration: 0.6 }}
+              className="glass-card p-10 rounded-[40px] relative border border-slate-100 dark:border-white/5 hover:shadow-2xl hover:shadow-royal-gold/5 transition-all duration-500 group"
             >
-              <div className="absolute top-6 right-8 text-primary-navy/10">
-                <Quote size={40} />
+              <div className="absolute top-8 right-10 text-royal-gold/10 group-hover:text-royal-gold/20 transition-colors">
+                <Quote size={48} />
               </div>
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-1 mb-6">
                 {[...Array(t.stars)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-secondary-gold text-secondary-gold" />
+                  <Star key={i} size={14} className="fill-royal-gold text-royal-gold" />
                 ))}
               </div>
-              <p className="text-text-muted italic mb-6 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 italic mb-8 leading-relaxed font-medium text-sm md:text-base">
                 "{t.content}"
               </p>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-primary-navy rounded-full flex items-center justify-center text-white font-bold">
+              <div className="flex items-center gap-4 pt-6 border-t border-slate-100 dark:border-white/5">
+                <div className="w-12 h-12 bg-gradient-to-br from-midnight to-slate-800 rounded-2xl flex items-center justify-center text-royal-gold font-black text-lg shadow-lg">
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-primary-navy leading-tight">{t.name}</h4>
-                  <p className="text-xs text-text-muted">{t.role}</p>
+                  <h4 className="font-black text-midnight dark:text-white leading-tight font-outfit">{t.name}</h4>
+                  <p className="text-[10px] font-bold text-royal-gold uppercase tracking-wider mt-1">{t.role}</p>
                 </div>
               </div>
             </motion.div>

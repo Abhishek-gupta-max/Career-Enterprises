@@ -3,8 +3,11 @@ import { useApplications } from '../../hooks/useJobs';
 import { SkeletonGrid } from '../ui/SkeletonCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Badge } from '../ui/Badge';
-import { Mail, Phone, Calendar, Download, Eye, Briefcase, Search, MapPin } from 'lucide-react';
+import { Mail, Phone, Calendar, Download, Eye, Briefcase, Search, MapPin, User, FileText, CheckCircle2 } from 'lucide-react';
 import { useJobs } from '../../hooks/useJobs';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { Divider } from 'primereact/divider';
 
 export function ApplicationList() {
   const { data: applications, isLoading, isError } = useApplications();
@@ -15,6 +18,39 @@ export function ApplicationList() {
   const [locationFilter, setLocationFilter] = useState('');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  
+  // Modal State
+  const [viewDialogVisible, setViewDialogVisible] = useState(false);
+  const [selectedApp, setSelectedApp] = useState(null);
+
+  const handleViewApp = (app) => {
+    setSelectedApp(app);
+    setViewDialogVisible(true);
+  };
+
+  const handleDownloadResume = async (app) => {
+    try {
+      const resumeName = app.resume || 'resume.pdf';
+      const finalName = resumeName.endsWith('.pdf') ? resumeName : `${resumeName}.pdf`;
+      
+      const response = await fetch('/resume.pdf');
+      const blob = await response.blob();
+      
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = finalName;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (err) {
+      console.error('Failed to download resume:', err);
+      alert('Failed to download resume. Please try again.');
+    }
+  };
 
   // Helper to get job object
   const getJob = (jobId) => {
@@ -261,8 +297,8 @@ export function ApplicationList() {
                       <div className="flex items-center justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
                         <button 
                           className="w-9 h-9 rounded-full bg-white dark:bg-dark-surface border border-slate-100 dark:border-dark-border text-slate-500 shadow-sm flex items-center justify-center hover:bg-royal-gold hover:text-white hover:border-royal-gold transition-all transform hover:scale-110"
-                          title="View Cover Letter"
-                          onClick={() => alert(`Cover Letter from ${app.fullName}:\n\n${app.coverLetter}`)}
+                          title="View Application Details"
+                          onClick={() => handleViewApp(app)}
                         >
                           <Eye size={14} />
                         </button>
@@ -270,7 +306,7 @@ export function ApplicationList() {
                         <button 
                           className="w-9 h-9 rounded-full bg-white dark:bg-dark-surface border border-slate-100 dark:border-dark-border text-slate-500 shadow-sm flex items-center justify-center hover:bg-royal-gold hover:text-white hover:border-royal-gold transition-all transform hover:scale-110"
                           title={`Download Resume: ${app.resume || 'Not provided'}`}
-                          onClick={() => alert(`Downloading resume: ${app.resume || 'No resume attached'}`)}
+                          onClick={() => handleDownloadResume(app)}
                         >
                           <Download size={14} />
                         </button>
@@ -283,6 +319,121 @@ export function ApplicationList() {
           </div>
         )}
       </div>
+
+      {/* View Application Dialog */}
+      <Dialog
+        visible={viewDialogVisible}
+        onHide={() => setViewDialogVisible(false)}
+        style={{ width: '650px' }}
+        className="p-fluid rounded-[32px] overflow-hidden shadow-2xl"
+        contentClassName="p-0"
+        header={
+          <div className="flex items-center gap-4 py-2">
+            <div className="w-12 h-12 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold shadow-inner">
+              <User size={24} />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl md:text-2xl font-black text-midnight dark:text-white font-outfit m-0 leading-tight">
+                Candidate Profile
+              </h3>
+              <p className="text-xs md:text-sm text-slate-500 font-medium m-0 opacity-80">Application Details</p>
+            </div>
+          </div>
+        }
+        footer={
+          <div className="flex items-center justify-between p-4 bg-slate-50/50 dark:bg-dark-surface/50 border-t border-slate-100 dark:border-dark-border">
+            <div className="text-xs text-slate-400 font-medium">
+              Applied on {selectedApp && new Date(selectedApp.submittedAt).toLocaleDateString()}
+            </div>
+            <Button 
+              label="Close" 
+              onClick={() => setViewDialogVisible(false)} 
+              className="p-button-text p-button-secondary rounded-xl font-bold"
+            />
+          </div>
+        }
+      >
+        {selectedApp && (
+          <div className="p-8 space-y-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
+            {/* Basic Info Card */}
+            <div className="bg-slate-50 dark:bg-dark-surface rounded-2xl p-6 border border-slate-100 dark:border-dark-border">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Full Name</p>
+                  <p className="font-bold text-midnight dark:text-white text-lg">{selectedApp.fullName}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Experience Level</p>
+                  <Badge variant="gold" className="capitalize px-4">{selectedApp.experience}</Badge>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Email Address</p>
+                  <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                    <Mail size={14} className="text-royal-gold" />
+                    <span className="font-semibold">{selectedApp.email}</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Phone Number</p>
+                  <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                    <Phone size={14} className="text-royal-gold" />
+                    <span className="font-semibold">{selectedApp.phone}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Applied For Section */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-royal-gold">
+                <Briefcase size={16} />
+                <span className="text-xs font-black uppercase tracking-widest">Applied For</span>
+              </div>
+              <div className="p-4 bg-white dark:bg-dark-card border border-slate-100 dark:border-dark-border rounded-2xl">
+                <p className="font-black text-midnight dark:text-white font-outfit">
+                  {getJob(selectedApp.jobId)?.title || `Job ID: ${selectedApp.jobId}`}
+                </p>
+                <div className="flex items-center gap-2 text-sm text-slate-500 mt-1">
+                  <MapPin size={14} />
+                  <span>{getJob(selectedApp.jobId)?.location || 'N/A'}</span>
+                </div>
+              </div>
+            </div>
+
+            <Divider className="my-0" />
+
+            {/* Cover Letter Section */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-royal-gold">
+                <FileText size={16} />
+                <span className="text-xs font-black uppercase tracking-widest">Cover Letter</span>
+              </div>
+              <div className="p-6 bg-slate-50 dark:bg-dark-surface border border-slate-100 dark:border-dark-border rounded-2xl whitespace-pre-wrap text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-medium">
+                {selectedApp.coverLetter || "No cover letter provided."}
+              </div>
+            </div>
+
+            {/* Resume Check */}
+            <div className="flex items-center justify-between p-4 border border-green-100 dark:border-green-900/30 bg-green-50/30 dark:bg-green-900/10 rounded-2xl">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-500">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-midnight dark:text-white">Resume Attached</p>
+                  <p className="text-[10px] text-slate-500">{selectedApp.resume || 'resume.pdf'}</p>
+                </div>
+              </div>
+              <Button 
+                icon="pi pi-download" 
+                label="Download" 
+                className="p-button-sm p-button-success p-button-outlined rounded-xl !py-2 !px-4"
+                onClick={() => handleDownloadResume(selectedApp)}
+              />
+            </div>
+          </div>
+        )}
+      </Dialog>
     </div>
   );
 }

@@ -1,25 +1,8 @@
-import initialData from '../data/db.json';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// Utility to manage localStorage data
-const getStorage = (key, defaultData) => {
-  const stored = localStorage.getItem(`ce_${key}`);
-  if (stored) return JSON.parse(stored);
-  localStorage.setItem(`ce_${key}`, JSON.stringify(defaultData));
-  return defaultData;
-};
-
-const setStorage = (key, data) => {
-  localStorage.setItem(`ce_${key}`, JSON.stringify(data));
-};
-
-// Initialize if empty
-getStorage('jobs', initialData.jobs);
-getStorage('applications', initialData.applications || []);
-getStorage('messages', initialData.messages || []);
-
-// Simulate network delay
-const delay = (ms = 300) => new Promise(resolve => setTimeout(resolve, ms));
-
+/**
+ * Fetch all jobs with optional search/filter/sort/pagination.
+ */
 export async function fetchJobs({
   search = '',
   category = 'All',
@@ -30,157 +13,130 @@ export async function fetchJobs({
   limit = 9,
   groupBy,
 } = {}) {
-  await delay();
-  let results = getStorage('jobs', initialData.jobs);
+  const params = new URLSearchParams({
+    search,
+    category,
+    country,
+    type,
+    sort,
+    page: page.toString(),
+    limit: limit.toString()
+  });
 
-  // Search
-  if (search) {
-    const q = search.toLowerCase();
-    results = results.filter(
-      (j) =>
-        j.title.toLowerCase().includes(q) ||
-        j.company.toLowerCase().includes(q) ||
-        j.location.toLowerCase().includes(q) ||
-        j.country.toLowerCase().includes(q) ||
-        j.category.toLowerCase().includes(q)
-    );
+  if (groupBy) {
+    params.append('groupBy', groupBy);
   }
 
-  // Filters
-  if (category && category !== 'All') {
-    results = results.filter((j) => j.category === category);
-  }
-  if (country && country !== 'All Countries') {
-    results = results.filter((j) => j.country === country);
-  }
-  if (type && type !== 'All Types') {
-    results = results.filter((j) => j.type === type);
-  }
-
-  // Sort
-  if (sort === 'newest') {
-    results.sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
-  }
-
-  // GroupBy
-  if (groupBy === 'category') {
-    const grouped = {};
-    results.forEach((job) => {
-      if (!grouped[job.category]) {
-        grouped[job.category] = [];
-      }
-      grouped[job.category].push(job);
-    });
-    return { jobs: grouped, total: results.length, isGrouped: true };
-  }
-
-  const total = results.length;
-  const totalPages = Math.ceil(total / limit);
-  const start = (page - 1) * limit;
-  const paginated = results.slice(start, start + limit);
-
-  return {
-    jobs: paginated,
-    total,
-    totalPages,
-    page: parseInt(page)
-  };
+  const response = await fetch(`${API_URL}/jobs?${params}`);
+  if (!response.ok) throw new Error('Failed to fetch jobs');
+  return response.json();
 }
 
+/**
+ * Fetch a single job by ID.
+ */
 export async function fetchJobById(id) {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const job = jobs.find(j => j.id === parseInt(id));
-  if (!job) throw new Error('Job not found');
-  return job;
+  const response = await fetch(`${API_URL}/jobs/${id}`);
+  if (!response.ok) throw new Error('Job not found');
+  return response.json();
 }
 
+/**
+ * Fetch featured jobs for the home page.
+ */
 export async function fetchFeaturedJobs() {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const featured = jobs.filter(j => j.featured).slice(0, 4);
-  return featured;
+  const response = await fetch(`${API_URL}/jobs/featured`);
+  if (!response.ok) throw new Error('Failed to fetch featured jobs');
+  return response.json();
 }
 
+/**
+ * Submit a job application.
+ */
 export async function submitApplication(jobId, formData) {
-  await delay();
-  const apps = getStorage('applications', initialData.applications);
-  const newApp = {
-    id: Date.now(),
-    jobId,
-    ...formData,
-    submittedAt: new Date().toISOString()
-  };
-  apps.push(newApp);
-  setStorage('applications', apps);
-  return { success: true, message: 'Application received!' };
+  const response = await fetch(`${API_URL}/applications`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ jobId, ...formData })
+  });
+  
+  if (!response.ok) throw new Error('Failed to submit application');
+  return response.json();
 }
 
+/**
+ * Fetch all applications (Admin).
+ */
 export async function fetchApplications() {
-  await delay();
-  const apps = getStorage('applications', initialData.applications);
-  return apps.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+  const response = await fetch(`${API_URL}/applications`);
+  if (!response.ok) throw new Error('Failed to fetch applications');
+  return response.json();
 }
 
+/**
+ * Submit a contact message.
+ */
 export async function submitContactMessage(formData) {
-  await delay();
-  const messages = getStorage('messages', initialData.messages);
-  const newMsg = {
-    id: Date.now(),
-    ...formData,
-    submittedAt: new Date().toISOString()
-  };
-  messages.push(newMsg);
-  setStorage('messages', messages);
-  return { success: true, message: 'Message received!' };
+  const response = await fetch(`${API_URL}/contact`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+  });
+  
+  if (!response.ok) throw new Error('Failed to submit message');
+  return response.json();
 }
 
+/**
+ * Create a new job (Admin).
+ */
 export async function createJob(jobData) {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const newJob = {
-    id: jobs.length > 0 ? Math.max(...jobs.map(j => j.id)) + 1 : 1,
-    ...jobData,
-    postedAt: new Date().toISOString().split('T')[0],
-    status: jobData.status || 'Published'
-  };
-  jobs.push(newJob);
-  setStorage('jobs', jobs);
-  return newJob;
+  const response = await fetch(`${API_URL}/jobs`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(jobData)
+  });
+  
+  if (!response.ok) throw new Error('Failed to create job');
+  return response.json();
 }
 
+/**
+ * Update an existing job (Admin).
+ */
 export async function updateJob(id, jobData) {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const index = jobs.findIndex(j => j.id === parseInt(id));
-  if (index !== -1) {
-    jobs[index] = { ...jobs[index], ...jobData };
-    setStorage('jobs', jobs);
-    return jobs[index];
-  }
-  throw new Error('Job not found');
+  const response = await fetch(`${API_URL}/jobs/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(jobData)
+  });
+  
+  if (!response.ok) throw new Error('Failed to update job');
+  return response.json();
 }
 
+/**
+ * Update job status (Admin).
+ */
 export async function updateJobStatus(id, status) {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const index = jobs.findIndex(j => j.id === parseInt(id));
-  if (index !== -1) {
-    jobs[index].status = status;
-    setStorage('jobs', jobs);
-    return jobs[index];
-  }
-  throw new Error('Job not found');
+  const response = await fetch(`${API_URL}/jobs/${id}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status })
+  });
+  
+  if (!response.ok) throw new Error('Failed to update job status');
+  return response.json();
 }
 
+/**
+ * Delete a job (Admin).
+ */
 export async function deleteJob(id) {
-  await delay();
-  const jobs = getStorage('jobs', initialData.jobs);
-  const index = jobs.findIndex(j => j.id === parseInt(id));
-  if (index !== -1) {
-    jobs.splice(index, 1);
-    setStorage('jobs', jobs);
-    return { success: true };
-  }
-  throw new Error('Job not found');
+  const response = await fetch(`${API_URL}/jobs/${id}`, {
+    method: 'DELETE'
+  });
+  
+  if (!response.ok) throw new Error('Failed to delete job');
+  return response.json();
 }

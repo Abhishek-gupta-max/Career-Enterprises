@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import { Footer, WhatsAppButton } from './components/layout/Footer';
 import { AdminRoute } from './components/auth/AdminRoute';
+import { Toaster } from 'react-hot-toast';
 
 // Lazy-loaded pages (code splitting)
 const Home      = lazy(() => import('./pages/Home'));
@@ -62,6 +63,7 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-off-white dark:bg-dark-surface text-midnight dark:text-white transition-colors duration-300">
         <AppRoutes />
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </BrowserRouter>
   );

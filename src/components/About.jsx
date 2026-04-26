@@ -13,10 +13,10 @@ const About = () => {
           className="relative"
         >
           <div className="relative z-10 glass-card p-4 overflow-hidden shadow-2xl">
-              <div className="aspect-[4/5] bg-slate-200 flex items-center justify-center relative overflow-hidden rounded-[30px]">
+              <div className="aspect-square md:aspect-[4/3] bg-slate-200 flex items-center justify-center relative overflow-hidden rounded-[30px]">
                  <img 
                   src="/src/assets/owner.jpg" 
-                  alt="Mr. Vikas" 
+                  alt="Mr. Vikas - Managing Director" 
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent"></div>

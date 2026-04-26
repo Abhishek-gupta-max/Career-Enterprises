@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Globe, Facebook, Instagram, Linkedin, ArrowUp, Phone, Mail, MapPin } from 'lucide-react';
+import logo from '../../assets/logo.jpg';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -13,8 +14,8 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-royal-gold rounded-xl flex items-center justify-center">
-                <Globe className="text-midnight" size={20} />
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center overflow-hidden">
+                <img src={logo} alt="CE Logo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="text-lg font-black font-outfit">CAREER <span className="text-royal-gold">ENTERPRISES</span></p>

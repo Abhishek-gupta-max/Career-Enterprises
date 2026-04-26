@@ -23,8 +23,8 @@ const jobSchema = z.object({
   location: z.string().min(1, 'Location is required'),
   country: z.string().min(1, 'Country is required'),
   company: z.string().min(1, 'Company name is required'),
-  salaryMin: z.number().optional(),
-  salaryMax: z.number().optional(),
+  salaryMin: z.number().nullable().default(0),
+  salaryMax: z.number().nullable().default(0),
   type: z.string().min(1, 'Job type is required'),
   lastDate: z.date().optional(),
   status: z.string().default('Published'),
@@ -140,7 +140,10 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
       <Button
         label={job ? "Update Job" : "Create Job"}
         icon="pi pi-check"
-        onClick={handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSubmit, (errs) => {
+          console.error('Validation errors:', errs);
+          toast.error('Please complete all required fields correctly');
+        })}
         className="btn-gold w-full sm:w-auto !py-3 !px-8 order-1 sm:order-2 shadow-lg shadow-royal-gold/20"
         autoFocus
       />
@@ -255,10 +258,11 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
                   control={control}
                   render={({ field }) => (
                     <InputNumber
-                      {...field}
                       id="experience"
+                      value={field.value}
                       onValueChange={(e) => field.onChange(e.value)}
                       className={cn('rounded-xl border-slate-200 shadow-sm', errors.experience && 'p-invalid')}
+                      min={0}
                     />
                   )}
                 />
@@ -402,11 +406,12 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
                   name="salaryMin"
                   control={control}
                   render={({ field }) => (
-                    <InputText
-                      {...field}
+                    <InputNumber
                       id="salaryMin"
+                      value={field.value}
                       onValueChange={(e) => field.onChange(e.value)}
                       className="rounded-xl border-slate-200 shadow-sm"
+                      placeholder="0"
                     />
                   )}
                 />
@@ -418,11 +423,12 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
                   name="salaryMax"
                   control={control}
                   render={({ field }) => (
-                    <InputText
-                      {...field}
+                    <InputNumber
                       id="salaryMax"
+                      value={field.value}
                       onValueChange={(e) => field.onChange(e.value)}
                       className="rounded-xl border-slate-200 shadow-sm"
+                      placeholder="0"
                     />
                   )}
                 />

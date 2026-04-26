@@ -97,14 +97,19 @@ export default function FeaturedJobs() {
         </div>
 
         {/* CTA */}
-        <div className="mt-14 bg-midnight dark:bg-dark-card rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-royal-gold/5 to-transparent" />
+        <div className="mt-20 bg-midnight dark:bg-dark-card rounded-[40px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden shadow-2xl shadow-midnight/20">
+          <div className="absolute inset-0 bg-gradient-to-r from-royal-gold/10 via-transparent to-transparent opacity-50" />
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-royal-gold/10 rounded-full blur-[100px]" />
+          
           <div className="text-white text-center md:text-left relative z-10">
-            <h3 className="text-2xl md:text-3xl font-black font-outfit mb-2">Looking for a specific role?</h3>
-            <p className="text-slate-400 text-sm max-w-md">Our consultants can source exclusive positions tailored to your unique profile and aspirations.</p>
+            <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-3 block">Personalized Search</span>
+            <h3 className="text-3xl md:text-4xl font-black font-outfit mb-4 leading-tight">Looking for a <span className="text-royal-gold underline decoration-royal-gold/20 underline-offset-8">specific role?</span></h3>
+            <p className="text-slate-400 text-base max-w-md font-inter leading-relaxed">
+              Our consultants can source exclusive positions tailored to your unique profile and aspirations.
+            </p>
           </div>
-          <Link to="/jobs" className="btn-gold relative z-10 whitespace-nowrap flex items-center gap-2">
-            Browse All Jobs <ArrowRight size={16} />
+          <Link to="/jobs" className="btn-gold !py-5 !px-10 relative z-10 whitespace-nowrap flex items-center gap-3 group shadow-xl shadow-royal-gold/20">
+            Browse All Jobs <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
