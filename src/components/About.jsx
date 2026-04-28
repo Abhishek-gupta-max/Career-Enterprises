@@ -5,8 +5,8 @@ import ownerImg from '../assets/owner.jpg';
 
 const About = () => {
   return (
-    <section id="about" className="section bg-off-white overflow-hidden py-16 md:py-32">
-      <div className="container px-6 mx-auto grid md:grid-cols-2 gap-20 items-center">
+    <section id="about" className="section bg-off-white overflow-hidden py-6 md:py-10">
+      <div className="container px-6 mx-auto grid md:grid-cols-2 gap-8 items-center">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -39,7 +39,7 @@ const About = () => {
           className="flex flex-col gap-10"
         >
           <div>
-            <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8">Our Heritage</span>
+            <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-2 block underline decoration-royal-gold/30 underline-offset-8">Our Heritage</span>
             <h2 className="text-4xl md:text-6xl font-black text-midnight font-outfit leading-tight lg:leading-[1.1] tracking-tight">
               Architecting <br /> 
               <span className="text-royal-gold">Global Legacies</span>

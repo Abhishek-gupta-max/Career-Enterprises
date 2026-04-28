@@ -9,7 +9,6 @@ import logo from '../../assets/logo.jpg';
 const navLinks = [
   { name: 'Home', to: '/' },
   { name: 'About', to: '/#about' },
-  { name: 'Services', to: '/#services' },
   { name: 'Jobs', to: '/jobs' },
   { name: 'Requirements', to: '/employer' },
   { name: 'Careers', to: '/careers' },
@@ -37,13 +36,25 @@ export default function Navbar() {
   return (
     <header className={cn('fixed w-full z-50 transition-all duration-500', transparent ? 'bg-transparent' : 'bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl shadow-sm border-b border-slate-100 dark:border-dark-border')}>
       {/* Top Bar for License Info */}
-      <div className="bg-midnight dark:bg-black text-white py-2 px-4 border-b border-royal-gold/20">
-        <div className="container mx-auto flex flex-wrap items-center justify-center text-[9px] sm:text-[11px] font-black tracking-[0.1em] gap-x-4 gap-y-1">
-          <span className="text-royal-gold uppercase tracking-[0.2em]">Approved By Ministry of External Affairs</span>
-          <div className="hidden md:block w-px h-3 bg-white/20"></div>
-          <span className="text-slate-200/80 uppercase">LIC: B-3077/HP/PART/100/11087/2025</span>
-          <div className="hidden md:block w-px h-3 bg-white/20"></div>
-          <span className="text-slate-200/80 uppercase">RA ID: RA6341360</span>
+      <div className="bg-midnight dark:bg-black text-white py-2 sm:py-3 px-4 sm:px-6 border-b border-royal-gold/20">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0 tracking-[0.05em]">
+          {/* Left: Email & Mobile in a row */}
+          <div className="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6">
+            <a href="mailto:careerenterprises0888@gmail.com" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
+              <Mail size={13} className="text-royal-gold flex-shrink-0" />
+              <span className="text-[10px] md:text-[16px] font-bold">careerenterprises0888@gmail.com</span>
+            </a>
+            <a href="tel:+917657950996" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
+              <Phone size={13} className="text-royal-gold flex-shrink-0" />
+              <span className="text-[14px] md:text-[16px] font-bold">+91-7657950996</span>
+            </a>
+          </div>
+
+          {/* Right: Company Name & RA License in a column */}
+          <div className="flex flex-col items-center sm:items-end leading-tight text-center sm:text-right">
+            <span className="text-royal-gold uppercase font-black text-[10px] md:text-[13px]">Approved By Ministry of External Affairs</span>
+            <span className="text-slate-400 uppercase font-bold text-[10px] md:text-[13px]">RA License No: B-3077/HP/PART/100/11087/2025</span>
+          </div>
         </div>
       </div>
 
@@ -68,7 +79,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const isHash = link.to.includes('#');
-              const isActive = isHash 
+              const isActive = isHash
                 ? location.hash === link.to.substring(link.to.indexOf('#'))
                 : (link.to === '/' ? (location.pathname === '/' && !location.hash) : location.pathname === link.to);
 
@@ -171,7 +182,7 @@ export default function Navbar() {
               <div className="container mx-auto py-6 flex flex-col gap-1">
                 {navLinks.map((link) => {
                   const isHash = link.to.includes('#');
-                  const isActive = isHash 
+                  const isActive = isHash
                     ? location.hash === link.to.substring(link.to.indexOf('#'))
                     : (link.to === '/' ? (location.pathname === '/' && !location.hash) : location.pathname === link.to);
 
@@ -182,8 +193,8 @@ export default function Navbar() {
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         "py-3 px-4 text-base font-bold rounded-xl transition-all block",
-                        isActive 
-                          ? "text-royal-gold bg-royal-gold/5" 
+                        isActive
+                          ? "text-royal-gold bg-royal-gold/5"
                           : "text-midnight dark:text-white hover:text-royal-gold hover:bg-slate-50 dark:hover:bg-dark-card"
                       )}
                     >

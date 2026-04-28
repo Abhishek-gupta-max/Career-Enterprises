@@ -16,16 +16,16 @@ const Gallery = () => {
   ];
 
   return (
-    <section id="gallery" className="section bg-white py-16 md:py-32">
+    <section id="gallery" className="section bg-white py-12 md:py-20">
       <div className="container px-6 mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8">Visual Insight</span>
           <h2 className="text-4xl md:text-5xl font-black text-midnight font-outfit">Our <span className="text-royal-gold">Gallery</span></h2>
           <p className="text-slate-500 mt-6 max-w-xl mx-auto font-inter text-sm">
             A glimpse into our professional environment and the verified team dedicated to your global career success.
           </p>
         </div>
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
           {images.map((img, idx) => (
             <motion.div
               key={idx}

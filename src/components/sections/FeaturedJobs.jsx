@@ -20,9 +20,9 @@ export default function FeaturedJobs() {
   const { isSaved, toggleSave } = useApp();
 
   return (
-    <section id="jobs" className="py-24 px-6 bg-off-white dark:bg-dark-surface">
+    <section id="jobs" className="py-10 px-6 bg-off-white dark:bg-dark-surface">
       <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <span className="section-label">Global Search</span>
             <h2 className="section-title">Featured <span className="text-royal-gold">Openings</span></h2>

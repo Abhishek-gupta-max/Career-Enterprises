@@ -5,59 +5,57 @@ import vikasCard from '../assets/card_vikas_legal.jpg';
 import raviCard from '../assets/card_ravi.jpg';
 import vishalCard from '../assets/card_vishal.jpg';
 import ravinderCard from '../assets/card_ravinder.jpg';
+import cert1 from '../assets/cert_1.jpg';
+import cert2 from '../assets/cert_2.jpg';
+import cert3 from '../assets/cert_3.jpg';
+import cert4 from '../assets/cert_4.jpg';
 
 const CredentialGallery = () => {
   const cards = [
+
     {
-      title: "Executive ID",
-      name: "Mr. Vikas",
-      img: vikasCard,
-      imgClass: "object-cover object-top",
-      desc: "Top profile identifying the strategic direction and partnership lead."
+      title: "Placement Verified",
+      name: "Candidate Success #1",
+      img: cert1,
+      imgClass: "object-cover object-center",
+      desc: "Official documentation and visa processing completed for overseas placement."
     },
     {
-      title: "Talent ID",
-      name: "Mr. Ravi Rana",
-      img: raviCard,
-      imgClass: "object-contain p-2 object-center",
-      desc: "Verification for our lead Hiring Manager and talent specialist."
+      title: "Placement Verified",
+      name: "Candidate Success #2",
+      img: cert2,
+      imgClass: "object-cover object-center",
+      desc: "Verified placement and deployment confirmation for our candidate."
     },
     {
-      title: "Advisory ID",
-      name: "Vishal Rana",
-      img: vishalCard,
-      imgClass: "object-contain p-2 object-center",
-      desc: "Certification for our senior documentation and career consultant."
+      title: "Placement Verified",
+      name: "Candidate Success #3",
+      img: cert3,
+      imgClass: "object-cover object-center",
+      desc: "Candidate successfully processed for international employment opportunities."
     },
     {
-      title: "Operational ID",
-      name: "Miss Ravinder Kaur",
-      img: ravinderCard,
-      imgClass: "object-contain p-2 object-center",
-      desc: "Official recognition for our operations management lead."
-    },
-    {
-      title: "Legal Accreditation",
-      name: "MEA License",
-      img: vikasCard,
-      imgClass: "object-cover object-bottom",
-      desc: "Government of India registered license (B-3077/HP/PART/100/11087/2025)."
+      title: "Placement Verified",
+      name: "Candidate Success #4",
+      img: cert4,
+      imgClass: "object-cover object-center",
+      desc: "Full transparency in recruitment: another candidate successfully deployed."
     }
   ];
 
   return (
-    <section id="credentials" className="section bg-midnight py-32 overflow-hidden relative">
+    <section id="credentials" className="section bg-midnight py-6 md:py-10 overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.03] pointer-events-none"></div>
       <div className="container px-6 mx-auto relative z-10">
-        <div className="text-center mb-24">
-          <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8">Verification Portfolio</span>
+        <div className="text-center mb-8">
+          <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-2 block underline decoration-royal-gold/30 underline-offset-8">Verification Portfolio</span>
           <h2 className="text-4xl md:text-5xl font-black text-white font-outfit">Official <span className="text-royal-gold">Certifications</span></h2>
           <p className="text-slate-400 mt-6 max-w-xl mx-auto font-inter text-sm">
             We operate with absolute transparency. Every member of our board is officially verified and our agency is licensed by the Ministry of External Affairs.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, idx) => (
             <motion.div
               key={idx}

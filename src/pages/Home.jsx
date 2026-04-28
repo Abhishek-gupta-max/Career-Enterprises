@@ -26,8 +26,8 @@ export default function Home() {
         <About />
         <Team />
         <CredentialGallery />
-        <Gallery />
-        <Services />
+        {/* <Gallery /> */}
+        {/* <Services /> */}
         <FeaturedJobs />
         <Testimonials />
         <Contact />

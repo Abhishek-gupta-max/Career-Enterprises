@@ -34,9 +34,9 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-white dark:bg-dark-card overflow-hidden">
+    <section id="contact" className="py-10 px-6 bg-white dark:bg-dark-card overflow-hidden">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <span className="section-label text-center block">Direct Access</span>
           <h2 className="section-title">
             Speak With Our <span className="text-royal-gold">Team</span>

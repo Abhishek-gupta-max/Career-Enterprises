@@ -27,12 +27,12 @@ const Trust = () => {
   ];
 
   return (
-    <section className="section bg-midnight relative py-16 md:py-32">
+    <section className="section bg-midnight relative py-6 md:py-10">
       <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="container relative z-10 px-6 mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-6">
           <div className="max-w-2xl">
-            <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8">Why Alignment Matters</span>
+            <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-2 block underline decoration-royal-gold/30 underline-offset-8">Why Alignment Matters</span>
             <h2 className="text-4xl md:text-5xl font-black text-white font-outfit">The Standard of <br /><span className="text-royal-gold">Excellence</span></h2>
           </div>
           <p className="text-slate-400 max-w-sm font-inter text-sm leading-relaxed">
@@ -59,7 +59,7 @@ const Trust = () => {
         </div>
 
         {/* Prominent Legal Credentials */}
-        <div className="mt-32">
+        <div className="mt-10">
           <div className="bg-gradient-to-br from-midnight to-slate-900 p-1 md:p-2 rounded-[50px] shadow-2xl">
             <div className="bg-midnight rounded-[45px] p-10 md:p-20 border border-white/5 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-64 h-64 bg-royal-gold/5 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2"></div>
