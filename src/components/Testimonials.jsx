@@ -25,7 +25,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section bg-white dark:bg-dark-surface py-6 md:py-10 overflow-hidden border-t border-slate-100 dark:border-dark-border">
+    <section className="section bg-white dark:bg-dark-surface py-12 overflow-hidden border-t border-slate-100 dark:border-dark-border">
       <div className="container px-6 mx-auto">
         <div className="text-center mb-6">
           <span className="text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-2 block underline decoration-royal-gold/30 underline-offset-8">Success Stories</span>

@@ -22,6 +22,30 @@ export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  const [langOpen, setLangOpen] = useState(false);
+
+  const languages = [
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+    { code: 'ar', name: 'العربية', flag: '🇦🇪' },
+    { code: 'bn', name: 'বাংলা', flag: '🇧🇩' },
+    { code: 'pa', name: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
+    { code: 'ur', name: 'اردو', flag: '🇵🇰' },
+    { code: 'ml', name: 'മലയാളം', flag: '🇮🇳' },
+    { code: 'ta', name: 'தமிழ்', flag: '🇮🇳' }
+  ];
+
+  const changeLanguage = (langCode) => {
+    const select = document.querySelector('select.goog-te-combo');
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event('change'));
+    } else {
+      console.warn('Google Translate not yet initialized');
+    }
+    setLangOpen(false);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -122,7 +146,44 @@ export default function Navbar() {
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            {/* Saved Jobs */}
+            {/* Language Selector */}
+            <div className="relative">
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className={cn(
+                  'flex items-center gap-2 p-2 rounded-xl transition-all duration-200 text-[11px] font-black uppercase tracking-widest',
+                  transparent ? 'text-white/90 hover:bg-white/10' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-dark-card'
+                )}
+              >
+                <Globe size={18} className="text-royal-gold" />
+                <span>Translate</span>
+              </button>
+
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-surface border border-slate-100 dark:border-dark-border rounded-2xl shadow-2xl overflow-hidden z-[60]"
+                  >
+                    <div className="py-2 grid grid-cols-1">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => changeLanguage(lang.code)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-card transition-colors text-left"
+                        >
+                          <span className="text-base">{lang.flag}</span>
+                          {lang.name}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <Link
               to="/saved"
               aria-label={`Saved jobs (${savedCount})`}
@@ -216,6 +277,23 @@ export default function Navbar() {
                     </NavLink>
                   );
                 })}
+
+                 {/* Language Selector Mobile */}
+                <div className="px-4 py-4 border-t border-slate-100 dark:border-dark-border">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Select Language</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => changeLanguage(lang.code)}
+                        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50 dark:bg-dark-card text-xs font-bold text-midnight dark:text-white border border-transparent hover:border-royal-gold transition-all"
+                      >
+                        <span className="text-base">{lang.flag}</span>
+                        {lang.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-100 dark:border-dark-border space-y-3">
                   <a href="tel:+917657950996" className="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 dark:text-slate-400 font-semibold">

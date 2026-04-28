@@ -69,6 +69,20 @@
 
 <body>
   <div id="root"></div>
+  
+  <!-- Google Translate Integration -->
+  <div id="google_translate_element" style="visibility: hidden; position: absolute; top: -1000px;"></div>
+  <script type="text/javascript">
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,ar,bn,pa,ur,ml,ta',
+        autoDisplay: false
+      }, 'google_translate_element');
+    };
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

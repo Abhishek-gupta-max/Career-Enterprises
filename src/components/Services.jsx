@@ -12,7 +12,7 @@ const iconMap = {
 
 const Services = () => {
   return (
-    <section id="services" className="section bg-midnight relative py-6 md:py-10 overflow-hidden">
+    <section id="services" className="section bg-midnight relative py-12 overflow-hidden">
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="container px-6 mx-auto">
         <div className="text-center mb-8">

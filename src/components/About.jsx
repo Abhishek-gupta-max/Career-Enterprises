@@ -5,8 +5,8 @@ import ownerImg from '../assets/owner.jpg';
 
 const About = () => {
   return (
-    <section id="about" className="section bg-white dark:bg-slate-950 overflow-hidden py-20">
-      <div className="container px-6 mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="section bg-white dark:bg-slate-950 overflow-hidden py-12">
+      <div className="container px-6 mx-auto grid lg:grid-cols-2 gap-10 items-center">
         {/* Left Side: Image with Badge */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }}

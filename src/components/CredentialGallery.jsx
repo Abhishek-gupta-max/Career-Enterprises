@@ -44,7 +44,7 @@ const CredentialGallery = () => {
   ];
 
   return (
-    <section id="credentials" className="section bg-midnight py-6 md:py-10 overflow-hidden relative">
+    <section id="credentials" className="section bg-midnight py-12 overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.03] pointer-events-none"></div>
       <div className="container px-6 mx-auto relative z-10">
         <div className="text-center mb-8">

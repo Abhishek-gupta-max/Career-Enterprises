@@ -15,7 +15,7 @@ const Hero = () => {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-royal-gold/10 to-transparent opacity-50"></div>
       </div>
 
-      <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center py-20">
+      <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center py-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}

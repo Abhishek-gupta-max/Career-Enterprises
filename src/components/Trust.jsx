@@ -27,7 +27,7 @@ const Trust = () => {
   ];
 
   return (
-    <section className="section bg-midnight relative py-6 md:py-10">
+    <section className="section bg-midnight relative py-12">
       <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="container relative z-10 px-6 mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-6">
