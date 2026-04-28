@@ -14,10 +14,15 @@ export default {
         'dark-surface': '#111827',
         'dark-card': '#1F2937',
         'dark-border': '#374151',
+        'primary': '#4F46E5',
+        'secondary': '#06B6D4',
+        'text-main': '#111827',
+        'muted': '#4B5563',
       },
       fontFamily: {
         'outfit': ['Outfit', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
+        'heading': ['Poppins', 'Inter', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',
