@@ -86,8 +86,8 @@ export default function Navbar() {
         <div className="container mx-auto flex justify-between items-center px-4 md:px-0">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group" aria-label="Career Enterprises Home">
-            <div className="w-10 h-10 bg-white dark:bg-white rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-500 flex-shrink-0 overflow-hidden">
-              <img src={logo} alt="CE Logo" className="w-full h-full object-cover" />
+            <div className="w-12 h-12 bg-white dark:bg-white rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-500 flex-shrink-0 overflow-hidden p-1">
+              <img src={logo} alt="CE Logo" className="w-full h-full object-contain" />
             </div>
             <div className="leading-none">
               <p className={cn('text-xl font-black tracking-tight font-outfit', transparent ? 'text-white' : 'text-midnight dark:text-white')}>
@@ -278,7 +278,7 @@ export default function Navbar() {
                   );
                 })}
 
-                 {/* Language Selector Mobile */}
+                {/* Language Selector Mobile */}
                 <div className="px-4 py-4 border-t border-slate-100 dark:border-dark-border">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Select Language</p>
                   <div className="grid grid-cols-2 gap-2">
