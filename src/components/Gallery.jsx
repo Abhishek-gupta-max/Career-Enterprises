@@ -5,6 +5,7 @@ import vikasCard from '../assets/card_vikas_legal.jpg';
 import raviCard from '../assets/card_ravi.jpg';
 import vishalCard from '../assets/card_vishal.jpg';
 import ravinderCard from '../assets/card_ravinder.jpg';
+import deepakImg from '../assets/deepak_rana.jpg';
 
 const Gallery = () => {
   const images = [
@@ -12,7 +13,8 @@ const Gallery = () => {
     { src: vikasCard, alt: "MEA License and ID" },
     { src: raviCard, alt: "Hiring Manager" },
     { src: vishalCard, alt: "Advisor" },
-    { src: ravinderCard, alt: "Operations Manager" }
+    { src: ravinderCard, alt: "Operations Manager" },
+    { src: deepakImg, alt: "Emigration Consultant" }
   ];
 
   return (

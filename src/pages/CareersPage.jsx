@@ -17,7 +17,7 @@ export default function CareersPage() {
         <meta name="description" content="Explore exciting career opportunities at Career Enterprises and join our elite team." />
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20">
 
         {/* Welcoming Introduction (Hero Section) */}
         <section className="bg-midnight dark:bg-dark-card py-20 px-6 relative overflow-hidden">

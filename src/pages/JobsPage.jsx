@@ -60,7 +60,7 @@ export default function JobsPage() {
         <meta name="description" content="Browse 100+ overseas job openings in UAE, Qatar, Saudi Arabia, Kuwait, Oman. Search by title, company, location, or category." />
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20">
 
         {/* Hero Banner */}
         <div className="bg-midnight dark:bg-dark-card py-14 px-6">

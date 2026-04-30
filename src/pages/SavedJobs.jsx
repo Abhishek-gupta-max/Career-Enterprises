@@ -18,7 +18,7 @@ export default function SavedJobs() {
         <meta name="description" content="View your bookmarked job listings on Career Enterprises." />
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20">
         <div className="container mx-auto px-6 py-10">
 
           {/* Header */}

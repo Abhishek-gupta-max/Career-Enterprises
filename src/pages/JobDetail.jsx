@@ -25,7 +25,7 @@ export default function JobDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-24">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-24">
         <div className="container mx-auto px-6 py-12">
           <div className="animate-skeleton space-y-6 max-w-4xl mx-auto">
             <div className="h-4 bg-slate-200 dark:bg-dark-border rounded w-40" />
@@ -45,7 +45,7 @@ export default function JobDetail() {
 
   if (isError || !job) {
     return (
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-24 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle size={48} className="text-red-400 mx-auto mb-4" />
           <h2 className="text-2xl font-black text-midnight dark:text-white mb-2">Job Not Found</h2>
@@ -73,7 +73,7 @@ export default function JobDetail() {
         })}</script>
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20">
         <div className="container mx-auto px-6 py-10 max-w-5xl">
 
           {/* Breadcrumb */}

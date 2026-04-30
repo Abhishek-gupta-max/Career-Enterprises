@@ -71,7 +71,7 @@ export default function EmployerPage() {
         <meta name="description" content="Manage your job openings and recruitment process." />
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-24 pb-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-24 pb-20">
         <div className="container mx-auto px-6">
           
           {/* Header */}

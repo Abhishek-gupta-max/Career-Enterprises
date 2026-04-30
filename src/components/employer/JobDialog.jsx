@@ -130,7 +130,7 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
   };
 
   const footer = (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 border-t border-slate-100 dark:border-dark-border bg-slate-50/50 dark:bg-dark-surface/50">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-6 md:p-8 border-t border-slate-100 dark:border-dark-border bg-slate-50/50 dark:bg-dark-surface/50">
       <Button
         label="Cancel"
         icon="pi pi-times"
@@ -153,7 +153,7 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
   return (
     <Dialog
       header={
-        <div className="flex items-center gap-4 py-2">
+        <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold shadow-inner">
             {job ? <Edit2 size={24} /> : <Plus size={24} />}
           </div>
@@ -170,8 +170,10 @@ export const JobDialog = ({ visible, onHide, job, onSave }) => {
       footer={footer}
       onHide={onHide}
       className="p-fluid rounded-[32px] overflow-hidden shadow-2xl"
+      headerClassName="p-6 md:p-8 border-b border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card"
+      contentClassName="p-0 bg-white dark:bg-dark-card"
+      footerClassName="p-0"
       breakpoints={{ '960px': '75vw', '641px': '95vw' }}
-      contentClassName="p-0" // Remove default padding for custom section control
     >
       <div className="p-6 md:p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">

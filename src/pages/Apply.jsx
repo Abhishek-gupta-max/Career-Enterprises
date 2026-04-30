@@ -47,7 +47,7 @@ export default function Apply() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20 flex items-center justify-center px-6">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20 flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 size={40} className="text-green-500" />
@@ -72,7 +72,7 @@ export default function Apply() {
         <meta name="description" content={`Apply for ${job?.title} at ${job?.company}. Submit your application through Career Enterprises.`} />
       </Helmet>
 
-      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-20">
+      <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-20">
         <div className="container mx-auto px-6 py-10 max-w-2xl">
 
           <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-midnight dark:hover:text-white transition-colors mb-8">

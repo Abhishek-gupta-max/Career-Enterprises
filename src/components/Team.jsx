@@ -5,6 +5,7 @@ import ownerImg from '../assets/owner.jpg';
 import raviCard from '../assets/card_ravi.jpg';
 import vishalCard from '../assets/card_vishal.jpg';
 import ravinderCard from '../assets/card_ravinder.jpg';
+import deepakImg from '../assets/deepak_rana.jpg';
 
 const Team = () => {
   const team = [
@@ -36,6 +37,15 @@ const Team = () => {
       bio: "Consultancy expert specializing in documentation and international mobility."
     },
     {
+      name: "Mr. Deepak Rana",
+      role: "Emigration Consultant",
+      phone: "+91-7657950996",
+      email: "careerenterprises0888@gmail.com",
+      image: deepakImg,
+      imgClass: "object-cover object-center",
+      bio: "Expert emigration consultant specializing in global mobility and visa compliance."
+    },
+    {
       name: "Miss Ravinder Kaur",
       role: "Operations Manager",
       phone: "+91-9805523265",
@@ -54,7 +64,7 @@ const Team = () => {
           <h2 className="text-4xl md:text-5xl font-black text-midnight font-outfit">The Minds Behind <br /><span className="text-royal-gold">Your Success</span></h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {team.map((member, idx) => (
             <motion.div
               key={idx}

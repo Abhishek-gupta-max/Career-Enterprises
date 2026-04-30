@@ -10,7 +10,7 @@ const stats = [
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-midnight">
+    <section id="home" className="relative min-h-screen flex items-center pt-36 lg:pt-20 overflow-hidden bg-midnight">
 
       {/* ── Cinematic Hero Background ── */}
       <div className="absolute inset-0 z-0">
