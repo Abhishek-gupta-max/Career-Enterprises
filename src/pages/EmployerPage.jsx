@@ -73,10 +73,10 @@ export default function EmployerPage() {
 
       <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-24 pb-20">
         <div className="container mx-auto px-6">
-          
+
           {/* Header */}
           <div className="mb-12">
-            <h1 className="text-4xl font-black text-midnight dark:text-white font-outfit mb-2">Employer Dashboard</h1>
+            <h1 className="text-4xl font-black text-midnight dark:text-white font-outfit mb-2">Employer Dashboard</h1><br></br>
             <p className="text-slate-500 dark:text-slate-400">Manage your global talent acquisition and overseas job listings.</p>
           </div>
 
@@ -102,34 +102,32 @@ export default function EmployerPage() {
 
           {/* Main Content */}
           <div className="bg-white dark:bg-dark-card rounded-[40px] border border-slate-100 dark:border-dark-border shadow-xl shadow-slate-200/50 dark:shadow-none p-8 md:p-12">
-            
+
             {/* Tabs & Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
               <div className="flex bg-slate-100 dark:bg-dark-surface p-1.5 rounded-2xl w-full md:w-auto">
                 <button
                   onClick={() => setActiveTab('jobs')}
-                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${
-                    activeTab === 'jobs' 
-                      ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm' 
-                      : 'text-slate-500 hover:text-midnight dark:hover:text-white'
-                  }`}
+                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'jobs'
+                    ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm'
+                    : 'text-slate-500 hover:text-midnight dark:hover:text-white'
+                    }`}
                 >
                   <Briefcase size={16} /> Manage Jobs
                 </button>
                 <button
                   onClick={() => setActiveTab('applications')}
-                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${
-                    activeTab === 'applications' 
-                      ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm' 
-                      : 'text-slate-500 hover:text-midnight dark:hover:text-white'
-                  }`}
+                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'applications'
+                    ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm'
+                    : 'text-slate-500 hover:text-midnight dark:hover:text-white'
+                    }`}
                 >
                   <FileText size={16} /> Applications
                 </button>
               </div>
 
               {activeTab === 'jobs' && (
-                <button 
+                <button
                   className="btn-gold !py-3 !px-8 flex items-center justify-center gap-2"
                   onClick={() => handleAddJob()}
                 >
@@ -150,8 +148,8 @@ export default function EmployerPage() {
                   <p>Error loading jobs. Please try again later.</p>
                 </div>
               ) : (
-                <EmployerJobList 
-                  jobs={data?.jobs || []} 
+                <EmployerJobList
+                  jobs={data?.jobs || []}
                   onEdit={handleEditJob}
                   onDelete={handleDeleteJob}
                   onAddJob={handleAddJob}
@@ -163,9 +161,9 @@ export default function EmployerPage() {
             )}
           </div>
 
-          <JobDialog 
-            visible={isDialogVisible} 
-            onHide={() => setDialogVisible(false)} 
+          <JobDialog
+            visible={isDialogVisible}
+            onHide={() => setDialogVisible(false)}
             job={selectedJob && selectedJob.id ? selectedJob : null}
             onSave={handleSaveJob}
           />
