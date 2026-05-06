@@ -68,9 +68,9 @@ export default function Navbar() {
               <Mail size={13} className="text-royal-gold flex-shrink-0" />
               <span className="text-[10px] md:text-[16px] font-bold">careerenterprises0888@gmail.com</span>
             </a>
-            <a href="tel:+917657950996" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
+            <a href="tel:+919805523265" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
               <Phone size={13} className="text-royal-gold flex-shrink-0" />
-              <span className="text-[14px] md:text-[16px] font-bold">+91-7657950996</span>
+              <span className="text-[14px] md:text-[16px] font-bold">+91-9805523265</span>
             </a>
           </div>
 
@@ -296,11 +296,11 @@ export default function Navbar() {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-100 dark:border-dark-border space-y-3">
-                  <a href="tel:+917657950996" className="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 dark:text-slate-400 font-semibold">
+                  <a href="tel:+919805523265" className="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 dark:text-slate-400 font-semibold">
                     <div className="w-8 h-8 bg-slate-50 dark:bg-dark-card rounded-full flex items-center justify-center text-royal-gold">
                       <Phone size={15} />
                     </div>
-                    +91-7657950996
+                    +91-9805523265
                   </a>
                   <a href="mailto:careerenterprises0888@gmail.com" className="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 dark:text-slate-400 font-semibold truncate">
                     <div className="w-8 h-8 bg-slate-50 dark:bg-dark-card rounded-full flex items-center justify-center text-royal-gold flex-shrink-0">

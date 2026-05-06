@@ -17,7 +17,7 @@ const schema = z.object({
 const contacts = [
   { label: 'Mr. Ravi Rana (Hiring)', value: '+91-9805364389', href: 'tel:+919805364389', icon: Phone },
   { label: 'Vishal Rana (Advisor)', value: '+91-8988637863', href: 'tel:+918988637863', icon: Phone },
-  { label: 'Deepak Rana (Consultant)', value: '+91-7657950996', href: 'tel:+917657950996', icon: Phone },
+  { label: 'Deepak Rana (Consultant)', value: '+91-9805523265', href: 'tel:+919805523265', icon: Phone },
   { label: 'Mr. Vikas (Lead)', value: '+91-7807464389', href: 'tel:+917807464389', icon: Phone },
   { label: 'Official Email', value: 'careerenterprises0888@gmail.com', href: 'mailto:careerenterprises0888@gmail.com', icon: Mail },
 ];
@@ -70,7 +70,7 @@ export default function Contact() {
               <div className="relative z-10">
                 <h4 className="text-base font-black mb-2 font-outfit">Instant WhatsApp Chat</h4>
                 <p className="text-sm text-slate-400 mb-6">Get an instant response from our consultants on WhatsApp.</p>
-                <a href="https://wa.me/917657950996" target="_blank" rel="noreferrer"
+                <a href="https://wa.me/9805523265" target="_blank" rel="noreferrer"
                   className="btn-gold w-full flex items-center justify-center gap-2">
                   <MessageSquare size={16} /> Chat Now
                 </a>

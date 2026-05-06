@@ -39,7 +39,7 @@ const Team = () => {
     {
       name: "Mr. Deepak Rana",
       role: "Emigration Consultant",
-      phone: "+91-7657950996",
+      phone: "+91-9805523265",
       email: "careerenterprises0888@gmail.com",
       image: deepakImg,
       imgClass: "object-cover object-center",

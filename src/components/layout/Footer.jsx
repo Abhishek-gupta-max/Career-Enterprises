@@ -79,8 +79,8 @@ export function Footer() {
             <h3 className="text-xs font-black uppercase tracking-[0.25em] text-royal-gold mb-8">Contact</h3>
             <ul className="space-y-4 text-sm text-slate-400">
               <li>
-                <a href="tel:+917657950996" className="flex items-center gap-3 hover:text-white transition-colors">
-                  <Phone size={14} className="text-royal-gold flex-shrink-0" /> +91-7657950996
+                <a href="tel:+919805523265" className="flex items-center gap-3 hover:text-white transition-colors">
+                  <Phone size={14} className="text-royal-gold flex-shrink-0" /> +91-9805523265
                 </a>
               </li>
               <li>
@@ -130,7 +130,7 @@ export function Footer() {
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/917657950996"
+      href="https://wa.me/919805523265"
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"

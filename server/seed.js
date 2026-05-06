@@ -13,7 +13,7 @@ async function seed() {
   try {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Career_Enterprises');
-    console.log('✅ Connected to MongoDB — Career_Enterprises');
+    console.log(' Connected to MongoDB — Career_Enterprises');
 
     // Read db.json
     const rawData = fs.readFileSync(DB_FILE, 'utf8');
@@ -23,12 +23,12 @@ async function seed() {
     await Job.deleteMany({});
     await Application.deleteMany({});
     await Message.deleteMany({});
-    console.log('🗑️  Cleared existing data from all collections.');
+    console.log('  Cleared existing data from all collections.');
 
     // Seed Jobs
     if (data.jobs && data.jobs.length > 0) {
       await Job.insertMany(data.jobs);
-      console.log(`✅ Inserted ${data.jobs.length} jobs.`);
+      console.log(` Inserted ${data.jobs.length} jobs.`);
     }
 
     // Seed Applications
@@ -44,7 +44,7 @@ async function seed() {
         submittedAt: app.submittedAt ? new Date(app.submittedAt) : new Date()
       }));
       await Application.insertMany(apps);
-      console.log(`✅ Inserted ${apps.length} applications.`);
+      console.log(` Inserted ${apps.length} applications.`);
     }
 
     // Seed Messages

@@ -32,10 +32,10 @@ export default function JobDetail() {
             <div className="h-10 bg-slate-200 dark:bg-dark-border rounded-xl w-2/3" />
             <div className="h-6 bg-slate-100 dark:bg-dark-border/60 rounded w-1/3" />
             <div className="grid md:grid-cols-3 gap-4">
-              {[1,2,3].map(i => <div key={i} className="h-24 bg-slate-100 dark:bg-dark-border/60 rounded-2xl" />)}
+              {[1, 2, 3].map(i => <div key={i} className="h-24 bg-slate-100 dark:bg-dark-border/60 rounded-2xl" />)}
             </div>
             <div className="space-y-3">
-              {[1,2,3,4,5].map(i => <div key={i} className="h-4 bg-slate-100 dark:bg-dark-border/60 rounded" />)}
+              {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-4 bg-slate-100 dark:bg-dark-border/60 rounded" />)}
             </div>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function JobDetail() {
 
                 <div className="mt-6 pt-6 border-t border-slate-100 dark:border-dark-border text-center">
                   <p className="text-xs text-slate-400 mb-3">Have questions? Contact us directly</p>
-                  <a href="https://wa.me/917657950996" target="_blank" rel="noreferrer"
+                  <a href="https://wa.me/919805523265" target="_blank" rel="noreferrer"
                     className="text-xs font-bold text-green-600 hover:text-green-700 transition-colors">
                     WhatsApp Us →
                   </a>
