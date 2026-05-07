@@ -73,9 +73,9 @@ const Trust = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full lg:w-auto z-10">
-                <div className="bg-white/5 p-8 rounded-[35px] border border-white/5 hover:bg-white/10 transition-all">
+                <div className="bg-white/5 p-10 rounded-[35px] border border-white/5 hover:bg-white/10 transition-all min-w-max">
                   <p className="text-[9px] font-black text-royal-gold uppercase tracking-[0.3em] mb-4">LIC Number</p>
-                  <p className="text-white text-lg font-black tracking-widest font-mono">B-3077/HP/PART/100/11087/2025</p>
+                  <p className="text-white text-sm font-black tracking-normal font-mono whitespace-nowrap">B-3077/HP/PART/100/11087/2025</p>
                   <p className="text-[9px] font-black text-royal-gold uppercase tracking-[0.3em] mb-4">RA ID Number</p>
                   <p className="text-white text-lg font-black tracking-widest font-mono">RA6341360</p>
                 </div>
