@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -152,7 +153,15 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
                               tooltipOptions={{ position: 'top' }}
                               icon={<Trash2 size={14} />} 
                               className="p-button-text p-button-danger rounded-xl h-9 w-9 p-0 bg-red-50 dark:bg-red-900/20" 
-                              onClick={() => onDelete(job.id)}
+                              onClick={() => {
+                                confirmDialog({
+                                  message: 'Are you sure you want to delete this job?',
+                                  header: 'Delete Confirmation',
+                                  icon: 'pi pi-exclamation-triangle',
+                                  acceptClassName: 'p-button-danger',
+                                  accept: () => onDelete(job.id),
+                                });
+                              }}
                             />
                           </div>
                         </div>
@@ -171,6 +180,7 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
           </div>
         )}
       </div>
+      <ConfirmDialog />
     </div>
   );
 };

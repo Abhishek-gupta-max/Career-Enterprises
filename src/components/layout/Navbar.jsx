@@ -68,9 +68,9 @@ export default function Navbar() {
               <Mail size={13} className="text-royal-gold flex-shrink-0" />
               <span className="text-[10px] md:text-[16px] font-bold">careerenterprises0888@gmail.com</span>
             </a>
-            <a href="tel:+919805523265" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
+            <a href="tel:+917807464389" className="flex items-center gap-2 hover:text-royal-gold transition-colors">
               <Phone size={13} className="text-royal-gold flex-shrink-0" />
-              <span className="text-[14px] md:text-[16px] font-bold">+91-9805523265</span>
+              <span className="text-[14px] md:text-[16px] font-bold">+91-7807464389</span>
             </a>
           </div>
 

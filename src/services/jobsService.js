@@ -1,5 +1,10 @@
 const API_URL = import.meta.env.PROD ? '/api' : (import.meta.env.VITE_API_URL || 'http://localhost:5000/api');
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('ce_auth_token');
+  return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
+
 /**
  * Fetch all jobs with optional search/filter/sort/pagination.
  */
@@ -68,7 +73,9 @@ export async function submitApplication(jobId, formData) {
  * Fetch all applications (Admin).
  */
 export async function fetchApplications() {
-  const response = await fetch(`${API_URL}/applications`);
+  const response = await fetch(`${API_URL}/applications`, {
+    headers: { ...getAuthHeaders() }
+  });
   if (!response.ok) throw new Error('Failed to fetch applications');
   return response.json();
 }
@@ -93,7 +100,10 @@ export async function submitContactMessage(formData) {
 export async function createJob(jobData) {
   const response = await fetch(`${API_URL}/jobs`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      ...getAuthHeaders()
+    },
     body: JSON.stringify(jobData)
   });
   
@@ -107,7 +117,10 @@ export async function createJob(jobData) {
 export async function updateJob(id, jobData) {
   const response = await fetch(`${API_URL}/jobs/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      ...getAuthHeaders()
+    },
     body: JSON.stringify(jobData)
   });
   
@@ -121,7 +134,10 @@ export async function updateJob(id, jobData) {
 export async function updateJobStatus(id, status) {
   const response = await fetch(`${API_URL}/jobs/${id}/status`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      ...getAuthHeaders()
+    },
     body: JSON.stringify({ status })
   });
   
@@ -134,7 +150,8 @@ export async function updateJobStatus(id, status) {
  */
 export async function deleteJob(id) {
   const response = await fetch(`${API_URL}/jobs/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: { ...getAuthHeaders() }
   });
   
   if (!response.ok) throw new Error('Failed to delete job');

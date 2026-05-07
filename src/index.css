@@ -30,7 +30,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   line-height: 1.2;
@@ -55,10 +60,17 @@ button {
   body {
     @apply bg-off-white text-midnight font-inter transition-colors duration-300;
   }
+
   body.dark {
     @apply bg-dark-surface text-white;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-outfit;
   }
 }
@@ -70,6 +82,7 @@ button {
   .section {
     @apply py-16 px-6 max-w-7xl mx-auto;
   }
+
   .container {
     @apply w-full max-w-[1200px] mx-auto px-6;
   }
@@ -78,9 +91,11 @@ button {
   .btn-primary {
     @apply bg-midnight text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg dark:bg-white dark:text-midnight dark:hover:bg-slate-200;
   }
+
   .btn-gold {
     @apply bg-royal-gold text-midnight px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-midnight hover:text-white transition-all duration-500 shadow-2xl shadow-royal-gold/20;
   }
+
   .btn-outline {
     @apply border-2 border-midnight/20 text-midnight px-6 py-3 rounded-xl font-bold hover:border-royal-gold hover:text-royal-gold transition-all dark:border-white/20 dark:text-white dark:hover:border-royal-gold dark:hover:text-royal-gold;
   }
@@ -89,6 +104,7 @@ button {
   .glass-card {
     @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl rounded-[40px] dark:bg-white/5 dark:border-white/10;
   }
+
   .job-card {
     @apply bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-royal-gold/30 transition-all duration-300 dark:bg-dark-card dark:border-dark-border dark:hover:border-royal-gold/30;
   }
@@ -97,9 +113,11 @@ button {
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-royal-gold via-yellow-200 to-royal-gold;
   }
+
   .section-label {
     @apply text-royal-gold font-black uppercase tracking-[0.3em] text-[10px] mb-4 block underline decoration-royal-gold/30 underline-offset-8;
   }
+
   .section-title {
     @apply text-4xl md:text-5xl font-black text-midnight font-outfit dark:text-white;
   }
@@ -108,9 +126,11 @@ button {
   .form-input {
     @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-royal-gold/40 focus:border-royal-gold transition-all dark:bg-dark-card dark:border-dark-border dark:text-white dark:focus:border-royal-gold placeholder:text-slate-400;
   }
+
   .form-label {
     @apply block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 dark:text-slate-400;
   }
+
   .form-error {
     @apply text-red-500 text-xs font-semibold mt-1;
   }
@@ -119,18 +139,27 @@ button {
   .filter-chip {
     @apply px-4 py-2 rounded-full text-xs font-bold border border-slate-200 text-slate-600 hover:border-royal-gold hover:text-royal-gold transition-all cursor-pointer dark:border-dark-border dark:text-slate-400 dark:hover:border-royal-gold dark:hover:text-royal-gold;
   }
+
   .filter-chip-active {
     @apply bg-midnight text-white border-midnight dark:bg-royal-gold dark:text-midnight dark:border-royal-gold;
   }
 }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { @apply bg-off-white dark:bg-dark-surface; }
-::-webkit-scrollbar-thumb { @apply bg-midnight/20 rounded-full hover:bg-midnight/40 transition-all dark:bg-white/20; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-off-white dark:bg-dark-surface;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-midnight/20 rounded-full hover:bg-midnight/40 transition-all dark:bg-white/20;
+}
 
 /* ─── Google Translate Cleanup ─── */
-.goog-te-banner-frame.skiptranslate, 
+.goog-te-banner-frame.skiptranslate,
 .goog-te-banner-frame,
 .goog-te-gadget-icon,
 iframe.goog-te-banner-frame,
@@ -144,7 +173,7 @@ body {
   position: static !important;
 }
 
-.goog-te-menu-value img, 
+.goog-te-menu-value img,
 .goog-te-menu-value span {
   display: none !important;
 }
@@ -169,7 +198,7 @@ body {
 
 
 /* Hide the "Original text" popup on hover */
-#goog-gt-tt, 
+#goog-gt-tt,
 .goog-te-balloon-frame {
   display: none !important;
   visibility: hidden !important;
@@ -180,3 +209,12 @@ body {
   box-shadow: none !important;
 }
 
+/* ─── Employer Accordion Fix ─── */
+/* PrimeReact accordion overrides Tailwind's dark:text-white on custom headers */
+.custom-employer-accordion .p-accordion-header-link {
+  color: #0F172A !important;
+}
+
+.dark .custom-employer-accordion .p-accordion-header-link {
+  color: #ffffff !important;
+}

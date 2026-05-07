@@ -20,8 +20,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Career_En
     console.error('❌ MongoDB connection error:', err.message);
     process.exit(1);
   });
+const authRoutes = require('./routes/auth');
+const { auth, adminOnly } = require('./middleware/auth');
 
 // --- Endpoints ---
+app.use('/api/auth', authRoutes);
 
 // Get all jobs with filters
 app.get('/api/jobs', async (req, res) => {
@@ -166,7 +169,7 @@ app.post('/api/contact', async (req, res) => {
 // --- Admin Job Management Endpoints ---
 
 // Create a new job
-app.post('/api/jobs', async (req, res) => {
+app.post('/api/jobs', [auth, adminOnly], async (req, res) => {
   try {
     // Get the next id
     const lastJob = await Job.findOne().sort({ id: -1 }).lean();
@@ -187,7 +190,7 @@ app.post('/api/jobs', async (req, res) => {
 });
 
 // Update an existing job
-app.put('/api/jobs/:id', async (req, res) => {
+app.put('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   try {
     const job = await Job.findOneAndUpdate(
       { id: parseInt(req.params.id) },
@@ -206,7 +209,7 @@ app.put('/api/jobs/:id', async (req, res) => {
 });
 
 // Patch job status (Publish/Unpublish)
-app.patch('/api/jobs/:id/status', async (req, res) => {
+app.patch('/api/jobs/:id/status', [auth, adminOnly], async (req, res) => {
   try {
     const job = await Job.findOneAndUpdate(
       { id: parseInt(req.params.id) },
@@ -225,7 +228,7 @@ app.patch('/api/jobs/:id/status', async (req, res) => {
 });
 
 // Delete a job
-app.delete('/api/jobs/:id', async (req, res) => {
+app.delete('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   try {
     const result = await Job.findOneAndDelete({ id: parseInt(req.params.id) });
     if (result) {

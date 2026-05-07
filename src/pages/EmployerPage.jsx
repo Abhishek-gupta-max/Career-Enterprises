@@ -4,13 +4,15 @@ import { useJobs } from '../hooks/useJobs';
 import { EmployerJobList } from '../components/employer/EmployerJobList';
 import { ApplicationList } from '../components/employer/ApplicationList';
 import { JobDialog } from '../components/employer/JobDialog';
-import { Briefcase, Building2, TrendingUp, Users, Plus, FileText } from 'lucide-react';
 import { createJob, updateJob, deleteJob, updateJobStatus } from '../services/jobsService';
 import { toast } from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../context/AuthContext';
+import { LogOut, Briefcase, Building2, TrendingUp, Users, Plus, FileText } from 'lucide-react';
 
 export default function EmployerPage() {
-  const { data, isLoading, error, refetch } = useJobs({ page: 1, limit: 100, groupBy: 'category' }); // Fetch grouped jobs from API
+  const { logout, user } = useAuth();
+  const { data, isLoading, error, refetch } = useJobs({ page: 1, limit: 100, groupBy: 'category' });
   const queryClient = useQueryClient();
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -27,14 +29,12 @@ export default function EmployerPage() {
   };
 
   const handleDeleteJob = async (id) => {
-    if (window.confirm('Are you sure you want to delete this job?')) {
-      try {
-        await deleteJob(id);
-        toast.success('Job deleted successfully');
-        queryClient.invalidateQueries(['jobs']);
-      } catch (err) {
-        toast.error('Failed to delete job');
-      }
+    try {
+      await deleteJob(id);
+      toast.success('Job deleted successfully');
+      queryClient.invalidateQueries(['jobs']);
+    } catch (err) {
+      toast.error('Failed to delete job');
     }
   };
 
@@ -54,10 +54,11 @@ export default function EmployerPage() {
     }
   };
 
-  const handleStatusToggle = async (id, status) => {
+  const handleStatusToggle = async (id, currentStatus) => {
+    const nextStatus = currentStatus === 'Published' || currentStatus === 'Open' ? 'Draft' : 'Published';
     try {
-      await updateJobStatus(id, status);
-      toast.success(`Job ${status === 'Published' ? 'published' : 'unpublished'} successfully`);
+      await updateJobStatus(id, nextStatus);
+      toast.success(`Job ${nextStatus === 'Published' ? 'published' : 'moved to draft'} successfully`);
       queryClient.invalidateQueries(['jobs']);
     } catch (err) {
       toast.error('Failed to update job status');
@@ -74,10 +75,18 @@ export default function EmployerPage() {
       <div className="min-h-screen bg-off-white dark:bg-dark-surface pt-36 lg:pt-24 pb-20">
         <div className="container mx-auto px-6">
 
-          {/* Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl font-black text-midnight dark:text-white font-outfit mb-2">Employer Dashboard</h1><br></br>
-            <p className="text-slate-500 dark:text-slate-400">Manage your global talent acquisition and overseas job listings.</p>
+          <div className="mb-12 flex items-start justify-between">
+            <div>
+              <h1 className="text-4xl font-black text-midnight dark:text-white font-outfit mb-2">Employer Dashboard</h1>
+              <p className="text-slate-500 dark:text-slate-400">Manage your global talent acquisition and overseas job listings.</p>
+            </div>
+            <button 
+              onClick={logout}
+              className="flex items-center gap-2 px-5 py-2.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/30 transition-all border border-red-100 dark:border-red-900/30"
+            >
+              <LogOut size={18} />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
           </div>
 
           {/* Stats Cards */}

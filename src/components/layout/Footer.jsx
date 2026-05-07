@@ -130,7 +130,7 @@ export function Footer() {
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/919805523265"
+      href="https://wa.me/7807464389"
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
