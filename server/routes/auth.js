@@ -4,24 +4,23 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
 
-// @route   POST api/auth/login
-// @desc    Authenticate user & get token
+// POST /api/auth/login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findByEmail(email);
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await User.comparePassword(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     const payload = {
-      id: user._id,
+      id: user.id,
       email: user.email,
       role: user.role,
       name: user.name
@@ -32,7 +31,7 @@ router.post('/login', async (req, res) => {
     res.json({
       token,
       user: {
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -44,11 +43,11 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// @route   GET api/auth/me
-// @desc    Get current user info
+// GET /api/auth/me
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) {
     console.error(err.message);

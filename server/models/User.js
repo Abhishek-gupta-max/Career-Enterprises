@@ -1,43 +1,36 @@
-const mongoose = require('mongoose');
+const pool = require('../db');
 const bcrypt = require('bcryptjs');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+const User = {
+  async findByEmail(email) {
+    const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email.toLowerCase()]);
+    return rows[0] || null;
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true
+
+  async findById(id) {
+    const [rows] = await pool.execute('SELECT id, name, email, role, createdAt FROM users WHERE id = ?', [id]);
+    return rows[0] || null;
   },
-  password: {
-    type: String,
-    required: true
+
+  async create({ name, email, password, role = 'user' }) {
+    const salt = await bcrypt.genSalt(12);
+    const hashed = await bcrypt.hash(password, salt);
+    const [result] = await pool.execute(
+      'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+      [name, email.toLowerCase(), hashed, role]
+    );
+    return this.findById(result.insertId);
   },
-  role: {
-    type: String,
-    enum: ['admin', 'user'],
-    default: 'user'
+
+  async updatePassword(id, newPassword) {
+    const salt = await bcrypt.genSalt(12);
+    const hashed = await bcrypt.hash(newPassword, salt);
+    await pool.execute('UPDATE users SET password = ? WHERE id = ?', [hashed, id]);
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+
+  async comparePassword(candidatePassword, hashedPassword) {
+    return bcrypt.compare(candidatePassword, hashedPassword);
   }
-});
-
-// Hash password before saving
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  const salt = await bcrypt.genSalt(12);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-// Method to compare password
-userSchema.methods.comparePassword = async function(candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = User;

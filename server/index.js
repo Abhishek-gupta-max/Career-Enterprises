@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const initDb = require('./initDb');
 
 const Job = require('./models/Job');
 const Application = require('./models/Application');
@@ -13,109 +13,71 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Career_Enterprises')
-  .then(() => console.log('✅ Connected to MongoDB — Career_Enterprises'))
+// Connect and initialise tables
+initDb()
+  .then(() => console.log('✅ Connected to MySQL — career_enterprises'))
   .catch((err) => {
-    console.error('❌ MongoDB connection error:', err.message);
+    console.error('❌ MySQL init error:', err.message);
     process.exit(1);
   });
+
 const authRoutes = require('./routes/auth');
 const { auth, adminOnly } = require('./middleware/auth');
 
-// --- Endpoints ---
 app.use('/api/auth', authRoutes);
 
-// Get all jobs with filters
+// ─── GET all jobs (search, filter, sort, paginate, group) ───────────────────
 app.get('/api/jobs', async (req, res) => {
   try {
     const { search, category, country, type, sort, page = 1, limit = 9, groupBy } = req.query;
-    let filter = {};
 
-    // Search
-    if (search) {
-      const regex = new RegExp(search, 'i');
-      filter.$or = [
-        { title: regex },
-        { company: regex },
-        { location: regex },
-        { country: regex },
-        { category: regex }
-      ];
-    }
+    const filter = {};
+    if (search) filter.search = search;
+    if (category && category !== 'All') filter.category = category;
+    if (country && country !== 'All Countries') filter.country = country;
+    if (type && type !== 'All Types') filter.type = type;
 
-    // Filters
-    if (category && category !== 'All') {
-      filter.category = category;
-    }
-    if (country && country !== 'All Countries') {
-      filter.country = country;
-    }
-    if (type && type !== 'All Types') {
-      filter.type = type;
-    }
-
-    // Sort
     let sortOption = {};
-    if (sort === 'newest') {
-      sortOption = { postedAt: -1 };
-    } else if (sort === 'oldest') {
-      sortOption = { postedAt: 1 };
-    }
+    if (sort === 'newest') sortOption = { field: 'postedAt', dir: 'DESC' };
+    else if (sort === 'oldest') sortOption = { field: 'postedAt', dir: 'ASC' };
 
-    // Handle grouping
     if (groupBy === 'category') {
-      const results = await Job.find(filter).sort(sortOption).lean();
+      const results = await Job.findAll(filter, sortOption, 0, 9999);
       const grouped = {};
       results.forEach((job) => {
-        if (!grouped[job.category]) {
-          grouped[job.category] = [];
-        }
+        if (!grouped[job.category]) grouped[job.category] = [];
         grouped[job.category].push(job);
       });
-      return res.json({
-        jobs: grouped,
-        total: results.length,
-        isGrouped: true
-      });
+      return res.json({ jobs: grouped, total: results.length, isGrouped: true });
     }
 
-    const total = await Job.countDocuments(filter);
+    const total = await Job.count(filter);
     const totalPages = Math.ceil(total / parseInt(limit));
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
-    const jobs = await Job.find(filter)
-      .sort(sortOption)
-      .skip(skip)
-      .limit(parseInt(limit))
-      .lean();
+    const jobs = await Job.findAll(filter, sortOption, skip, parseInt(limit));
 
-    res.json({
-      jobs,
-      total,
-      totalPages,
-      page: parseInt(page)
-    });
+    res.json({ jobs, total, totalPages, page: parseInt(page) });
   } catch (err) {
     console.error('Error fetching jobs:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Get featured jobs
+// ─── GET featured jobs ───────────────────────────────────────────────────────
 app.get('/api/jobs/featured', async (req, res) => {
   try {
-    const featured = await Job.find({ featured: true }).limit(4).lean();
+    const featured = await Job.findFeatured(4);
     res.json(featured);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Get single job
+// ─── GET single job ──────────────────────────────────────────────────────────
 app.get('/api/jobs/:id', async (req, res) => {
   try {
-    const job = await Job.findOne({ id: parseInt(req.params.id) }).lean();
+    const job = await Job.findById(req.params.id);
     if (job) {
       res.json(job);
     } else {
@@ -126,14 +88,10 @@ app.get('/api/jobs/:id', async (req, res) => {
   }
 });
 
-// Submit application
+// ─── POST submit application ─────────────────────────────────────────────────
 app.post('/api/applications', async (req, res) => {
   try {
-    const newApp = new Application({
-      ...req.body,
-      submittedAt: new Date()
-    });
-    await newApp.save();
+    await Application.create(req.body);
     res.status(201).json({ success: true, message: 'Application received!' });
   } catch (err) {
     console.error('Error submitting application:', err);
@@ -141,24 +99,20 @@ app.post('/api/applications', async (req, res) => {
   }
 });
 
-// Get all applications
+// ─── GET all applications ────────────────────────────────────────────────────
 app.get('/api/applications', async (req, res) => {
   try {
-    const applications = await Application.find().sort({ submittedAt: -1 }).lean();
+    const applications = await Application.findAll();
     res.json(applications);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Submit contact message
+// ─── POST submit contact message ─────────────────────────────────────────────
 app.post('/api/contact', async (req, res) => {
   try {
-    const newMsg = new Message({
-      ...req.body,
-      submittedAt: new Date()
-    });
-    await newMsg.save();
+    await Message.create(req.body);
     res.status(201).json({ success: true, message: 'Message received!' });
   } catch (err) {
     console.error('Error submitting message:', err);
@@ -166,22 +120,14 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// --- Admin Job Management Endpoints ---
-
-// Create a new job
+// ─── ADMIN: Create job ───────────────────────────────────────────────────────
 app.post('/api/jobs', [auth, adminOnly], async (req, res) => {
   try {
-    // Get the next id
-    const lastJob = await Job.findOne().sort({ id: -1 }).lean();
-    const nextId = lastJob ? lastJob.id + 1 : 1;
-
-    const newJob = new Job({
-      id: nextId,
+    const newJob = await Job.create({
       ...req.body,
       postedAt: new Date().toISOString().split('T')[0],
       status: req.body.status || 'Published'
     });
-    await newJob.save();
     res.status(201).json(newJob);
   } catch (err) {
     console.error('Error creating job:', err);
@@ -189,14 +135,10 @@ app.post('/api/jobs', [auth, adminOnly], async (req, res) => {
   }
 });
 
-// Update an existing job
+// ─── ADMIN: Update job ───────────────────────────────────────────────────────
 app.put('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   try {
-    const job = await Job.findOneAndUpdate(
-      { id: parseInt(req.params.id) },
-      req.body,
-      { new: true }
-    ).lean();
+    const job = await Job.update(req.params.id, req.body);
     if (job) {
       res.json(job);
     } else {
@@ -208,14 +150,10 @@ app.put('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   }
 });
 
-// Patch job status (Publish/Unpublish)
+// ─── ADMIN: Patch job status ─────────────────────────────────────────────────
 app.patch('/api/jobs/:id/status', [auth, adminOnly], async (req, res) => {
   try {
-    const job = await Job.findOneAndUpdate(
-      { id: parseInt(req.params.id) },
-      { status: req.body.status },
-      { new: true }
-    ).lean();
+    const job = await Job.updateStatus(req.params.id, req.body.status);
     if (job) {
       res.json(job);
     } else {
@@ -227,11 +165,11 @@ app.patch('/api/jobs/:id/status', [auth, adminOnly], async (req, res) => {
   }
 });
 
-// Delete a job
+// ─── ADMIN: Delete job ───────────────────────────────────────────────────────
 app.delete('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   try {
-    const result = await Job.findOneAndDelete({ id: parseInt(req.params.id) });
-    if (result) {
+    const deleted = await Job.delete(req.params.id);
+    if (deleted) {
       res.json({ success: true, message: 'Job deleted successfully' });
     } else {
       res.status(404).json({ message: 'Job not found' });
