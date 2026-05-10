@@ -94,12 +94,13 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
                         {groupedJobs[category].length}
                       </span>
                     </div>
-                    <Button 
-                      icon="pi pi-plus" 
-                      label="Add Job" 
-                      className="p-button-text p-button-sm text-royal-gold hover:bg-royal-gold/5 font-black text-xs" 
+                    <button 
+                      className="flex items-center gap-1.5 text-royal-gold hover:bg-royal-gold/10 px-3 py-1.5 rounded-lg font-black text-[11px] uppercase tracking-wider transition-colors ml-2 flex-shrink-0"
                       onClick={(e) => { e.stopPropagation(); onAddJob(category); }}
-                    />
+                    >
+                      <Plus size={14} strokeWidth={3} />
+                      <span>Add Job</span>
+                    </button>
                   </div>
                 }
               >
@@ -130,29 +131,38 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
                             </div>
                           </div>
                           
-                          <div className="flex items-center gap-2">
-                            <Link to={`/jobs/${job.id}`} target="_blank">
-                              <Button tooltip="Public View" tooltipOptions={{ position: 'top' }} icon={<ExternalLink size={14} />} className="p-button-text p-button-secondary rounded-xl h-9 w-9 p-0 bg-slate-50 dark:bg-dark-border/30" />
+                          <div className="flex items-center gap-2 mt-3 md:mt-0 justify-end">
+                            <Link 
+                              to={`/jobs/${job.id}`} 
+                              target="_blank"
+                              title="Public View"
+                              className="flex items-center justify-center h-9 w-9 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-dark-border/30 dark:hover:bg-dark-border transition-colors text-slate-500"
+                            >
+                              <ExternalLink size={14} />
                             </Link>
-                            <Button 
-                              tooltip="Edit" 
-                              tooltipOptions={{ position: 'top' }}
-                              icon={<Edit2 size={14} />} 
-                              className="p-button-text p-button-info rounded-xl h-9 w-9 p-0 bg-blue-50 dark:bg-blue-900/20" 
+                            
+                            <button 
+                              title="Edit" 
                               onClick={() => onEdit(job)}
-                            />
-                            <Button 
-                              tooltip={isLive ? "Move to Draft" : "Publish to Portal"}
-                              tooltipOptions={{ position: 'top' }}
-                              icon={isLive ? <EyeOff size={14} /> : <Eye size={14} />}
-                              className={`p-button-text rounded-xl h-9 w-9 p-0 ${isLive ? 'p-button-warning bg-orange-50 dark:bg-orange-900/20' : 'p-button-success bg-green-50 dark:bg-green-900/20'}`}
+                              className="flex items-center justify-center h-9 w-9 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 transition-colors text-blue-500"
+                            >
+                              <Edit2 size={14} />
+                            </button>
+                            
+                            <button 
+                              title={isLive ? "Move to Draft" : "Publish to Portal"}
                               onClick={() => onStatusToggle(job.id, job.status)}
-                            />
-                            <Button 
-                              tooltip="Delete" 
-                              tooltipOptions={{ position: 'top' }}
-                              icon={<Trash2 size={14} />} 
-                              className="p-button-text p-button-danger rounded-xl h-9 w-9 p-0 bg-red-50 dark:bg-red-900/20" 
+                              className={`flex items-center justify-center h-9 w-9 rounded-xl transition-colors ${
+                                isLive 
+                                  ? 'bg-orange-50 hover:bg-orange-100 dark:bg-orange-900/20 dark:hover:bg-orange-900/40 text-orange-500' 
+                                  : 'bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/40 text-green-500'
+                              }`}
+                            >
+                              {isLive ? <EyeOff size={14} /> : <Eye size={14} />}
+                            </button>
+                            
+                            <button 
+                              title="Delete" 
                               onClick={() => {
                                 confirmDialog({
                                   message: 'Are you sure you want to delete this job?',
@@ -162,7 +172,10 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
                                   accept: () => onDelete(job.id),
                                 });
                               }}
-                            />
+                              className="flex items-center justify-center h-9 w-9 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 transition-colors text-red-500"
+                            >
+                              <Trash2 size={14} />
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -176,7 +189,13 @@ export const EmployerJobList = ({ jobs = [], onEdit, onDelete, onAddJob, onStatu
           <div className="text-center py-20 bg-slate-50 dark:bg-dark-card rounded-[40px] border border-dashed border-slate-200 dark:border-dark-border">
             <Briefcase className="mx-auto text-slate-300 dark:text-slate-700 mb-4" size={48} />
             <h3 className="text-xl font-bold text-midnight dark:text-white mb-2">No jobs available</h3>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">Try adjusting your search or filters to find what you're looking for.</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">You haven't posted any jobs yet.</p>
+            <button 
+              onClick={() => onAddJob()} 
+              className="btn-gold !py-3 !px-8 flex items-center justify-center gap-2 mx-auto"
+            >
+              <Plus size={18} /> Post New Job
+            </button>
           </div>
         )}
       </div>

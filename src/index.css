@@ -210,11 +210,29 @@ body {
 }
 
 /* ─── Employer Accordion Fix ─── */
-/* PrimeReact accordion overrides Tailwind's dark:text-white on custom headers */
 .custom-employer-accordion .p-accordion-header-link {
+  background-color: #F8FAFC !important;
   color: #0F172A !important;
+  border-color: #f1f5f9 !important;
+  border-radius: 16px !important;
+  margin-bottom: 8px;
+  box-shadow: none !important;
+}
+
+.custom-employer-accordion .p-accordion-content {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 .dark .custom-employer-accordion .p-accordion-header-link {
+  background-color: #1F2937 !important;
   color: #ffffff !important;
+  border-color: #374151 !important;
+}
+
+.custom-employer-accordion .p-accordion-header-text {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
 }

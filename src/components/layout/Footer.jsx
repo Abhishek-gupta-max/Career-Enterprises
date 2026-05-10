@@ -50,6 +50,7 @@ export function Footer() {
                 { label: 'Saved Jobs', to: '/saved' },
                 { label: 'About Us', to: '/#about' },
                 { label: 'Contact', to: '/#contact' },
+                { label: 'Employer Login', to: '/employer' },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="hover:text-white transition-colors flex items-center gap-2 group">

@@ -27,10 +27,11 @@ const Job = {
       sql += ` ORDER BY ${sortOption.field} ${sortOption.dir || 'DESC'}`;
     }
 
+    // Use pool.query for LIMIT/OFFSET to avoid prepared statement parameter type issues
     sql += ' LIMIT ? OFFSET ?';
-    params.push(limit, skip);
+    params.push(parseInt(limit), parseInt(skip));
 
-    const [rows] = await pool.execute(sql, params);
+    const [rows] = await pool.query(sql, params);
     return rows.map(parseJob);
   },
 
@@ -56,17 +57,17 @@ const Job = {
       params.push(filter.type);
     }
 
-    const [[{ total }]] = await pool.execute(sql, params);
+    const [[{ total }]] = await pool.query(sql, params);
     return total;
   },
 
   async findFeatured(limit = 4) {
-    const [rows] = await pool.execute('SELECT * FROM jobs WHERE featured = 1 LIMIT ?', [limit]);
+    const [rows] = await pool.query('SELECT * FROM jobs WHERE featured = 1 LIMIT ?', [parseInt(limit)]);
     return rows.map(parseJob);
   },
 
   async findById(id) {
-    const [rows] = await pool.execute('SELECT * FROM jobs WHERE id = ?', [parseInt(id)]);
+    const [rows] = await pool.query('SELECT * FROM jobs WHERE id = ?', [parseInt(id)]);
     return rows.length ? parseJob(rows[0]) : null;
   },
 

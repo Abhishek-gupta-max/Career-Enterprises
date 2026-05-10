@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail, Globe, Sun, Moon, Bookmark } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../../context/AppContext';
+import { useAuth } from '../../context/AuthContext';
 import { cn } from '../../utils/cn';
 import logo from '../../assets/logo.jpg';
 
@@ -10,8 +11,8 @@ const navLinks = [
   { name: 'Home', to: '/' },
   { name: 'About', to: '/#about' },
   { name: 'Jobs', to: '/jobs' },
-  { name: 'Requirements', to: '/employer' },
-  { name: 'Careers', to: '/careers' },
+
+
   { name: 'Contact', to: '/#contact' },
 ];
 
@@ -19,10 +20,15 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { darkMode, toggleDarkMode, savedCount } = useApp();
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const isHome = location.pathname === '/';
 
   const [langOpen, setLangOpen] = useState(false);
+
+  const displayLinks = isAdmin
+    ? [...navLinks, { name: 'Requirments', to: '/employer' }]
+    : navLinks;
 
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -101,7 +107,7 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
+            {displayLinks.map((link) => {
               const isHash = link.to.includes('#');
               const isActive = isHash
                 ? location.hash === link.to.substring(link.to.indexOf('#'))
@@ -241,7 +247,7 @@ export default function Navbar() {
               className="md:hidden overflow-hidden bg-white dark:bg-dark-surface border-t border-slate-100 dark:border-dark-border"
             >
               <div className="container mx-auto py-6 flex flex-col gap-1">
-                {navLinks.map((link) => {
+                {displayLinks.map((link) => {
                   const isHash = link.to.includes('#');
                   const isActive = isHash
                     ? location.hash === link.to.substring(link.to.indexOf('#'))

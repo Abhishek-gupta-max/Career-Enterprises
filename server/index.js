@@ -99,8 +99,8 @@ app.post('/api/applications', async (req, res) => {
   }
 });
 
-// ─── GET all applications ────────────────────────────────────────────────────
-app.get('/api/applications', async (req, res) => {
+// ─── GET all applications (Admin) ───────────────────────────────────────────
+app.get('/api/applications', [auth, adminOnly], async (req, res) => {
   try {
     const applications = await Application.findAll();
     res.json(applications);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useJobs } from '../hooks/useJobs';
+import { useJobs, useApplications } from '../hooks/useJobs';
 import { EmployerJobList } from '../components/employer/EmployerJobList';
 import { ApplicationList } from '../components/employer/ApplicationList';
 import { JobDialog } from '../components/employer/JobDialog';
@@ -12,7 +12,8 @@ import { LogOut, Briefcase, Building2, TrendingUp, Users, Plus, FileText } from 
 
 export default function EmployerPage() {
   const { logout, user } = useAuth();
-  const { data, isLoading, error, refetch } = useJobs({ page: 1, limit: 100, groupBy: 'category' });
+  const { data, isLoading: isJobsLoading, error: jobsError } = useJobs({ page: 1, limit: 100, groupBy: 'category' });
+  const { data: applications, isLoading: isAppsLoading } = useApplications();
   const queryClient = useQueryClient();
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -80,7 +81,7 @@ export default function EmployerPage() {
               <h1 className="text-4xl font-black text-midnight dark:text-white font-outfit mb-2">Employer Dashboard</h1>
               <p className="text-slate-500 dark:text-slate-400">Manage your global talent acquisition and overseas job listings.</p>
             </div>
-            <button 
+            <button
               onClick={logout}
               className="flex items-center gap-2 px-5 py-2.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/30 transition-all border border-red-100 dark:border-red-900/30"
             >
@@ -93,7 +94,7 @@ export default function EmployerPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               { label: 'Active Jobs', value: data?.total || 0, icon: Briefcase, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/20' },
-              { label: 'Total Applications', value: '150+', icon: Users, color: 'text-royal-gold', bg: 'bg-royal-gold/10' },
+              { label: 'Total Applications', value: applications?.length || 0, icon: Users, color: 'text-royal-gold', bg: 'bg-royal-gold/10' },
               { label: 'Partner Companies', value: '45+', icon: Building2, color: 'text-green-500', bg: 'bg-green-50 dark:bg-green-900/20' },
               { label: 'Placement Rate', value: '92%', icon: TrendingUp, color: 'text-purple-500', bg: 'bg-purple-50 dark:bg-purple-900/20' },
             ].map((stat, i) => (
@@ -115,7 +116,7 @@ export default function EmployerPage() {
             {/* Tabs & Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
               <div className="flex bg-slate-100 dark:bg-dark-surface p-1.5 rounded-2xl w-full md:w-auto">
-                <button
+                {/* <button
                   onClick={() => setActiveTab('jobs')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'jobs'
                     ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm'
@@ -123,7 +124,7 @@ export default function EmployerPage() {
                     }`}
                 >
                   <Briefcase size={16} /> Manage Jobs
-                </button>
+                </button>*/}
                 <button
                   onClick={() => setActiveTab('applications')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'applications'
@@ -135,47 +136,49 @@ export default function EmployerPage() {
                 </button>
               </div>
 
-              {activeTab === 'jobs' && (
+              {/*{activeTab === 'jobs' && (
                 <button
                   className="btn-gold !py-3 !px-8 flex items-center justify-center gap-2"
                   onClick={() => handleAddJob()}
                 >
                   <Plus size={20} /> Post New Job
                 </button>
-              )}
+              )} */}
             </div>
 
-            {activeTab === 'jobs' ? (
-              isLoading ? (
-                <div className="space-y-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="h-20 bg-slate-100 dark:bg-dark-surface/50 rounded-2xl animate-pulse"></div>
-                  ))}
-                </div>
-              ) : error ? (
-                <div className="text-center py-12 text-red-500">
-                  <p>Error loading jobs. Please try again later.</p>
-                </div>
-              ) : (
-                <EmployerJobList
-                  jobs={data?.jobs || []}
-                  onEdit={handleEditJob}
-                  onDelete={handleDeleteJob}
-                  onAddJob={handleAddJob}
-                  onStatusToggle={handleStatusToggle}
-                />
-              )
-            ) : (
-              <ApplicationList />
-            )}
+            {/* 
+              activeTab === 'jobs' ? (
+                isJobsLoading ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="h-20 bg-slate-100 dark:bg-dark-surface/50 rounded-2xl animate-pulse"></div>
+                    ))}
+                  </div>
+                ) : jobsError ? (
+                  <div className="text-center py-12 text-red-500">
+                    <p>Error loading jobs. Please try again later.</p>
+                  </div>
+                ) : (
+                  <EmployerJobList
+                    jobs={data?.jobs || []}
+                    onEdit={handleEditJob}
+                    onDelete={handleDeleteJob}
+                    onAddJob={handleAddJob}
+                    onStatusToggle={handleStatusToggle}
+                  />
+                )
+              ) : null
+            */}
+            
+            <ApplicationList />
           </div>
 
-          <JobDialog
+          {/* <JobDialog
             visible={isDialogVisible}
             onHide={() => setDialogVisible(false)}
             job={selectedJob && selectedJob.id ? selectedJob : null}
             onSave={handleSaveJob}
-          />
+          />*/}
         </div>
       </div>
     </>
