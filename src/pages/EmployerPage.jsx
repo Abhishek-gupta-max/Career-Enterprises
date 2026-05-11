@@ -116,7 +116,7 @@ export default function EmployerPage() {
             {/* Tabs & Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
               <div className="flex bg-slate-100 dark:bg-dark-surface p-1.5 rounded-2xl w-full md:w-auto">
-                {/* <button
+                <button
                   onClick={() => setActiveTab('jobs')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'jobs'
                     ? 'bg-white dark:bg-dark-card text-royal-gold shadow-sm'
@@ -124,7 +124,7 @@ export default function EmployerPage() {
                     }`}
                 >
                   <Briefcase size={16} /> Manage Jobs
-                </button>*/}
+                </button>
                 <button
                   onClick={() => setActiveTab('applications')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${activeTab === 'applications'
@@ -136,49 +136,48 @@ export default function EmployerPage() {
                 </button>
               </div>
 
-              {/*{activeTab === 'jobs' && (
+              {activeTab === 'jobs' && (
                 <button
                   className="btn-gold !py-3 !px-8 flex items-center justify-center gap-2"
                   onClick={() => handleAddJob()}
                 >
                   <Plus size={20} /> Post New Job
                 </button>
-              )} */}
+              )}
             </div>
 
-            {/* 
-              activeTab === 'jobs' ? (
-                isJobsLoading ? (
-                  <div className="space-y-4">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="h-20 bg-slate-100 dark:bg-dark-surface/50 rounded-2xl animate-pulse"></div>
-                    ))}
-                  </div>
-                ) : jobsError ? (
-                  <div className="text-center py-12 text-red-500">
-                    <p>Error loading jobs. Please try again later.</p>
-                  </div>
-                ) : (
-                  <EmployerJobList
-                    jobs={data?.jobs || []}
-                    onEdit={handleEditJob}
-                    onDelete={handleDeleteJob}
-                    onAddJob={handleAddJob}
-                    onStatusToggle={handleStatusToggle}
-                  />
-                )
-              ) : null
-            */}
-            
-            <ApplicationList />
+
+            {activeTab === 'jobs' ? (
+              isJobsLoading ? (
+                <div className="space-y-4">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="h-20 bg-slate-100 dark:bg-dark-surface/50 rounded-2xl animate-pulse"></div>
+                  ))}
+                </div>
+              ) : jobsError ? (
+                <div className="text-center py-12 text-red-500">
+                  <p>Error loading jobs. Please try again later.</p>
+                </div>
+              ) : (
+                <EmployerJobList
+                  jobs={data?.jobs || []}
+                  onEdit={handleEditJob}
+                  onDelete={handleDeleteJob}
+                  onAddJob={handleAddJob}
+                  onStatusToggle={handleStatusToggle}
+                />
+              )
+            ) : (
+              <ApplicationList />
+            )}
           </div>
 
-          {/* <JobDialog
+          <JobDialog
             visible={isDialogVisible}
             onHide={() => setDialogVisible(false)}
             job={selectedJob && selectedJob.id ? selectedJob : null}
             onSave={handleSaveJob}
-          />*/}
+          />
         </div>
       </div>
     </>

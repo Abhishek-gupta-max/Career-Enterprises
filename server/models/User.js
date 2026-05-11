@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const User = {
   async findByEmail(email) {
+    if (!email) return null;
     const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email.toLowerCase()]);
     return rows[0] || null;
   },
