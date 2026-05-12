@@ -236,3 +236,66 @@ body {
   width: 100%;
   display: flex;
 }
+/* ─── ConfirmDialog Custom Styles ─── */
+.p-confirm-dialog.p-dialog {
+  border-radius: 32px !important;
+  overflow: hidden !important;
+  border: none !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.p-confirm-dialog .p-dialog-header {
+  padding: 1.5rem 2rem 1rem !important;
+  background: white !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.dark .p-confirm-dialog .p-dialog-header {
+  background: #111827 !important;
+  border-color: #374151 !important;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  padding: 2.5rem 2.5rem !important; /* Increased padding as requested */
+  background: white !important;
+  color: #475569 !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+}
+
+.dark .p-confirm-dialog .p-dialog-content {
+  background: #111827 !important;
+  color: #94a3b8 !important;
+}
+
+.p-confirm-dialog .p-dialog-footer {
+  padding: 1.25rem 2rem !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #f1f5f9 !important;
+}
+
+.dark .p-confirm-dialog .p-dialog-footer {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+.p-confirm-dialog .p-dialog-header-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #0f172a !important;
+}
+
+.dark .p-confirm-dialog .p-dialog-header-title {
+  color: white !important;
+}
+
+.p-confirm-dialog .p-confirm-dialog-icon {
+  font-size: 1.5rem !important;
+  margin-right: 1.25rem !important;
+}
+
+.p-confirm-dialog .p-confirm-dialog-message {
+  font-size: 1rem !important;
+}

@@ -81,6 +81,19 @@ export async function fetchApplications() {
 }
 
 /**
+ * Delete an application (Admin).
+ */
+export async function deleteApplication(id) {
+  const response = await fetch(`${API_URL}/applications/${id}`, {
+    method: 'DELETE',
+    headers: { ...getAuthHeaders() }
+  });
+  
+  if (!response.ok) throw new Error('Failed to delete application');
+  return response.json();
+}
+
+/**
  * Submit a contact message.
  */
 export async function submitContactMessage(formData) {

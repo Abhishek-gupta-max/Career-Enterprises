@@ -123,7 +123,7 @@ export default function EmployerPage() {
                     : 'text-slate-500 hover:text-midnight dark:hover:text-white'
                     }`}
                 >
-                  <Briefcase size={16} /> Manage Jobs
+                  <Briefcase size={16} /> Requirements
                 </button>
                 <button
                   onClick={() => setActiveTab('applications')}

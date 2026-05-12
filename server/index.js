@@ -109,6 +109,21 @@ app.get('/api/applications', [auth, adminOnly], async (req, res) => {
   }
 });
 
+// ─── DELETE application (Admin) ──────────────────────────────────────────────
+app.delete('/api/applications/:id', [auth, adminOnly], async (req, res) => {
+  try {
+    const deleted = await Application.delete(req.params.id);
+    if (deleted) {
+      res.json({ success: true, message: 'Application deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Application not found' });
+    }
+  } catch (err) {
+    console.error('Error deleting application:', err);
+    res.status(500).json({ message: 'Failed to delete application' });
+  }
+});
+
 // ─── POST submit contact message ─────────────────────────────────────────────
 app.post('/api/contact', async (req, res) => {
   try {

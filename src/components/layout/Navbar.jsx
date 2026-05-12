@@ -26,8 +26,8 @@ export default function Navbar() {
 
   const [langOpen, setLangOpen] = useState(false);
 
-  const displayLinks = isAdmin
-    ? [...navLinks, { name: 'Requirments', to: '/employer' }]
+  const displayLinks = (isAdmin && location.pathname === '/employer')
+    ? [...navLinks, { name: 'Requirements', to: '/employer' }]
     : navLinks;
 
   const languages = [

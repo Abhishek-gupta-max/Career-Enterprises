@@ -13,6 +13,11 @@ const Application = {
   async findAll() {
     const [rows] = await pool.execute('SELECT * FROM applications ORDER BY submittedAt DESC');
     return rows;
+  },
+
+  async delete(id) {
+    const [result] = await pool.execute('DELETE FROM applications WHERE id = ?', [id]);
+    return result.affectedRows > 0;
   }
 };
 
