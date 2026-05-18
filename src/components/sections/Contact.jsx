@@ -18,7 +18,7 @@ const contacts = [
   { label: 'Mr. Ravi Rana (Hiring)', value: '+91-9805364389', href: 'tel:+919805364389', icon: Phone },
   { label: 'Vishal Rana (Advisor)', value: '+91-8988637863', href: 'tel:+918988637863', icon: Phone },
   { label: 'Miss Ravinder Kaur (Operations Manager)', value: '+91-9805523265', href: 'tel:+919805523265', icon: Phone },
-  { label: 'Deepak Rana (Consultant)', value: '+91-7657350996', href: 'tel:+917657350996', icon: Phone },
+  // { label: 'Deepak Rana (Consultant)', value: '+91-7657350996', href: 'tel:+917657350996', icon: Phone },
   { label: 'Mr. Vikas (Lead)', value: '+91-7807464389', href: 'tel:+917807464389', icon: Phone },
   { label: 'Official Email', value: 'careerenterprises0888@gmail.com', href: 'mailto:careerenterprises0888@gmail.com', icon: Mail },
 ];
