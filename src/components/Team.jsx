@@ -1,11 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, Linkedin, ExternalLink } from 'lucide-react';
+import { Phone, Mail, ExternalLink } from 'lucide-react';
 import ownerImg from '../assets/owner.jpg';
 import raviCard from '../assets/card_ravi.jpg';
 import vishalCard from '../assets/card_vishal.jpg';
 import ravinderCard from '../assets/card_ravinder.jpg';
-// import deepakImg from '../assets/deepak_rana.jpg';
 
 const Team = () => {
   const team = [

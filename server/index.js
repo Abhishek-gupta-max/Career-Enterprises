@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const initDb = require('./initDb');
 
 const Job = require('./models/Job');
@@ -195,7 +196,20 @@ app.delete('/api/jobs/:id', [auth, adminOnly], async (req, res) => {
   }
 });
 
-if (process.env.NODE_ENV !== 'production') {
+// Serve static assets from dist folder in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  
+  app.get('*', (req, res, next) => {
+    // If it's an API request, let Express handle it
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
+
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
   });

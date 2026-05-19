@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { Mail, Phone, MapPin, MessageSquare, Send } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { cn } from '../../utils/cn';
+import { submitContactMessage } from '../../services/jobsService';
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -29,10 +30,13 @@ export default function Contact() {
   });
 
   const onSubmit = async (data) => {
-    await new Promise((r) => setTimeout(r, 800));
-    console.log('Contact form:', data);
-    toast.success('Message sent! We\'ll get back to you shortly.');
-    reset();
+    try {
+      await submitContactMessage(data);
+      toast.success('Message sent! We\'ll get back to you shortly.');
+      reset();
+    } catch (err) {
+      toast.error('Failed to send message. Please try again.');
+    }
   };
 
   return (
